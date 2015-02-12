@@ -4,3 +4,5 @@
 \\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 \\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.exe
 \\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.pdb
+\\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\ball.xnb
+\\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\pad.xnb

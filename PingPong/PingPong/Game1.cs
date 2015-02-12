@@ -18,6 +18,7 @@ namespace PingPong
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D ballTexture;
 
         public Game1()
         {
@@ -46,6 +47,8 @@ namespace PingPong
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            this.ballTexture = this.Content.Load<Texture2D>("ball");
 
             // TODO: use this.Content to load your game content here
         }
@@ -84,6 +87,11 @@ namespace PingPong
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            this.spriteBatch.Begin();
+            Vector2 coords = new Vector2(50.0f, 50.0f);
+            this.spriteBatch.Draw(this.ballTexture, coords, Color.White);
+            this.spriteBatch.End();
 
             base.Draw(gameTime);
         }
