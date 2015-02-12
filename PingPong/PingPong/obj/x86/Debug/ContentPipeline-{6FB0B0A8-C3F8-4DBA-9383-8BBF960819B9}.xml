@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>\\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\ball.xnb</Output>
-      <Time>2015-02-12T14:16:27+01:00</Time>
+      <Output>C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\ball.xnb</Output>
+      <Time>2015-02-12T14:26:26.835364+01:00</Time>
     </Item>
     <Item>
       <Source>pad.jpg</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>\\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\pad.xnb</Output>
-      <Time>2015-02-12T14:16:27+01:00</Time>
+      <Output>C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\pad.xnb</Output>
+      <Time>2015-02-12T14:26:26.8605005+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -26,10 +26,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>\\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPongContent\</RootDirectory>
-      <LoggerRootDirectory>\\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\</LoggerRootDirectory>
-      <IntermediateDirectory>\\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>\\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPongContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -57,8 +57,8 @@
         <Value>2011-09-01T17:22:30+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2015-02-12T13:26:55.3696721+01:00</Value>
+        <Key>C:\windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2015-02-12T13:13:14.9512289+01:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

@@ -6,3 +6,11 @@
 \\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.pdb
 \\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\ball.xnb
 \\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\pad.xnb
+C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\ball.xnb
+C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\pad.xnb
+C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\PingPong.exe
+C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\PingPong.pdb
+C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.csprojResolveAssemblyReference.cache
+C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.exe
+C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.pdb

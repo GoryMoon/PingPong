@@ -19,6 +19,11 @@ namespace PingPong
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D ballTexture;
+        Texture2D padTexture;
+        Vector2 ballCoord;
+        Vector2 padCoord;
+        Vector2 padCoord2;
+        int speed;
 
         public Game1()
         {
@@ -37,6 +42,10 @@ namespace PingPong
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            this.speed = 5;
+            this.ballCoord = new Vector2(300.0f, 100.0f);
+            this.padCoord = new Vector2(100.0f, 100.0f);
+            this.padCoord2 = new Vector2(700.0f, 100.0f);
         }
 
         /// <summary>
@@ -49,6 +58,7 @@ namespace PingPong
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             this.ballTexture = this.Content.Load<Texture2D>("ball");
+            this.padTexture = this.Content.Load<Texture2D>("pad");
 
             // TODO: use this.Content to load your game content here
         }
@@ -75,7 +85,23 @@ namespace PingPong
 
             // TODO: Add your update logic here
 
+            if (this.ballCoord.X > 800)
+            {
+                this.speed *= -1;
+            }
+            else if (this.ballCoord.X < 0)
+            {
+                this.speed *= -1;
+            }
+
+            this.ballCoord.X += this.speed;
+
+
+            this.padCoord.Y -= 2;
+            this.padCoord2.Y -= 2;
+
             base.Update(gameTime);
+
         }
 
         /// <summary>
@@ -88,10 +114,22 @@ namespace PingPong
 
             // TODO: Add your drawing code here
 
+            //ball
+
             this.spriteBatch.Begin();
-            Vector2 coords = new Vector2(50.0f, 50.0f);
-            this.spriteBatch.Draw(this.ballTexture, coords, Color.White);
+            this.spriteBatch.Draw(this.ballTexture, this.ballCoord, Color.White);
+
+            //pad 1
+
+            this.spriteBatch.Draw(this.padTexture, this.padCoord , Color.White);
+
+            //pad 2
+
+            this.spriteBatch.Draw(this.padTexture, this.padCoord2, Color.White);
+
             this.spriteBatch.End();
+
+           
 
             base.Draw(gameTime);
         }
