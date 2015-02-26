@@ -13,35 +13,39 @@ using Microsoft.Xna.Framework.Media;
 
 namespace PingPong.GameObjects
 {
-    class PlayerPaddle : Paddle
+    /// <summary>
+    /// Base class for paddles
+    /// </summary>
+    abstract class Paddle : GameObject
     {
+        private Texture2D spriteTexture;
+
         /// <summary>
         /// Create a new player paddle at a specified position
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public PlayerPaddle(Game game, float x, float y) : base(game, x, y)
+        public Paddle(Game game, float x, float y) : base(game, x, y)
         {
 
         }
 
         /// <summary>
-        /// Update game logic; move player paddle on key press
+        /// Load the sprite texture
+        /// </summary>
+        public override void LoadContent()
+        {
+            this.spriteTexture = this.game.Content.Load<Texture2D>("pad");
+        }
+
+        /// <summary>
+        /// Draw the paddle
         /// </summary>
         /// <param name="gameTime"></param>
-        override public void Update(GameTime gameTime)
+        /// <param name="spriteBatch"></param>
+        override public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            KeyboardState state = Keyboard.GetState();
-
-            if (state.IsKeyDown(Keys.Up) && this.position.Y > 0)
-            {
-                this.position.Y -= 2;
-            }
-
-            if (state.IsKeyDown(Keys.Down) && this.position.Y < 480 - 150)
-            {
-                this.position.Y += 2;
-            }
+            spriteBatch.Draw(this.spriteTexture, this.position, Color.White);
         }
     }
 }

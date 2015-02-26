@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+using PingPong.GameObjects;
+
 namespace PingPong
 {
     /// <summary>
@@ -18,18 +20,22 @@ namespace PingPong
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D ballTexture;
-        Texture2D padTexture;
-        Vector2 ballCoord;
-        Vector2 padCoord;
-        Vector2 padCoord2;
-        int speed;
+
+        // Game objects
+        PlayerPaddle playerPaddle;
+        ComputerPaddle computerPaddle;
+        Ball ball;
         
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            // Create game objects
+            this.playerPaddle = new PlayerPaddle(this, 100f, 100f);
+            this.computerPaddle = new ComputerPaddle(this, 700f, 100f);
+            this.ball = new Ball(this, 100f, 100f);
         }
 
         /// <summary>
@@ -40,13 +46,7 @@ namespace PingPong
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
-            this.speed = 5;
-            this.ballCoord = new Vector2(300.0f, 100.0f);
-            this.padCoord = new Vector2(100.0f, 100.0f);
-            this.padCoord2 = new Vector2(700.0f, 100.0f);
         }
 
         /// <summary>
@@ -58,10 +58,9 @@ namespace PingPong
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            this.ballTexture = this.Content.Load<Texture2D>("ball");
-            this.padTexture = this.Content.Load<Texture2D>("pad");
-
-            // TODO: use this.Content to load your game content here
+            this.playerPaddle.LoadContent();
+            this.computerPaddle.LoadContent();
+            this.ball.LoadContent();
         }
 
         /// <summary>
@@ -85,39 +84,11 @@ namespace PingPong
                 this.Exit();
 
             // TODO: Add your update logic here
-
-            if (this.ballCoord.X > 800)
-            {
-                this.speed *= -1;
-            }
-            else if (this.ballCoord.X < 0)
-            {
-                this.speed *= -1;
-            }
-
-            this.ballCoord.X += this.speed;
-
-
-            
-            this.padCoord2.Y -= 2;
-
-            KeyboardState state = Keyboard.GetState();
-
-            if (state.IsKeyDown(Keys.Up) && this.padCoord.Y > 0)
-            {
-                this.padCoord.Y -= 2;
-            }
-
-            if (state.IsKeyDown(Keys.Down) && this.padCoord.Y < 480-150)
-            {
-                this.padCoord.Y += 2;
-            }
-
+            this.playerPaddle.Update(gameTime);
+            this.computerPaddle.Update(gameTime);
+            this.ball.Update(gameTime);
 
             base.Update(gameTime);
-
-        
-
         }
 
         /// <summary>
@@ -128,25 +99,14 @@ namespace PingPong
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-
-            //ball
-
             this.spriteBatch.Begin();
-            this.spriteBatch.Draw(this.ballTexture, this.ballCoord, Color.White);
 
-            //pad 1
-
-            this.spriteBatch.Draw(this.padTexture, this.padCoord , Color.White);
-
-            //pad 2
-
-            this.spriteBatch.Draw(this.padTexture, this.padCoord2, Color.White);
+            // Draw game objects
+            this.playerPaddle.Draw(gameTime, this.spriteBatch);
+            this.computerPaddle.Draw(gameTime, this.spriteBatch);
+            this.ball.Draw(gameTime, this.spriteBatch);
 
             this.spriteBatch.End();
-
-           
-
             base.Draw(gameTime);
         }
     }

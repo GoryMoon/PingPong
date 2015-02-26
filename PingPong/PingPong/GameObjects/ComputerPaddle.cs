@@ -13,14 +13,14 @@ using Microsoft.Xna.Framework.Media;
 
 namespace PingPong.GameObjects
 {
-    class PlayerPaddle : Paddle
+    class ComputerPaddle : Paddle
     {
         /// <summary>
         /// Create a new player paddle at a specified position
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public PlayerPaddle(Game game, float x, float y) : base(game, x, y)
+        public ComputerPaddle(Game game, float x, float y) : base(game, x, y)
         {
 
         }
@@ -31,17 +31,7 @@ namespace PingPong.GameObjects
         /// <param name="gameTime"></param>
         override public void Update(GameTime gameTime)
         {
-            KeyboardState state = Keyboard.GetState();
-
-            if (state.IsKeyDown(Keys.Up) && this.position.Y > 0)
-            {
-                this.position.Y -= 2;
-            }
-
-            if (state.IsKeyDown(Keys.Down) && this.position.Y < 480 - 150)
-            {
-                this.position.Y += 2;
-            }
+            // todo: AI
         }
     }
 }
