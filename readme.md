@@ -9,3 +9,7 @@ Datorn styr sin paddle upp eller ner för att försöka matcha bollens y-positio
 
 ## Vad behöver göras?
 Kolla [GitHub Issues](https://github.com/TEINF12A/PingPong/issues) för projekthantering.
+
+## Klassdiagram
+Diagram över *"GameObjects"* polymorfism.
+![Klassdiagram](https://raw.githubusercontent.com/TEINF12A/PingPong/master/Game%20object%20class%20diagram.png)
