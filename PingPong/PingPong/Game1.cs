@@ -24,6 +24,7 @@ namespace PingPong
         Vector2 padCoord;
         Vector2 padCoord2;
         int speed;
+        
 
         public Game1()
         {
@@ -97,10 +98,25 @@ namespace PingPong
             this.ballCoord.X += this.speed;
 
 
-            this.padCoord.Y -= 2;
+            
             this.padCoord2.Y -= 2;
 
+            KeyboardState state = Keyboard.GetState();
+
+            if (state.IsKeyDown(Keys.Up) && this.padCoord.Y > 0)
+            {
+                this.padCoord.Y -= 2;
+            }
+
+            if (state.IsKeyDown(Keys.Down) && this.padCoord.Y < 480-150)
+            {
+                this.padCoord.Y += 2;
+            }
+
+
             base.Update(gameTime);
+
+        
 
         }
 
