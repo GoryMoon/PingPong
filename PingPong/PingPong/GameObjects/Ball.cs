@@ -43,15 +43,36 @@ namespace PingPong.GameObjects
         /// Update game logic. Move the ball
         /// </summary>
         /// <param name="gameTime"></param>
+        bool startOver=false;
+
         public override void Update(GameTime gameTime)
         {
+            if (startOver == true)
+            {
+                KeyboardState state = Keyboard.GetState();
+
+                if (state.IsKeyDown(Keys.Up))
+                {
+                    this.speed = 4;
+                }
+
+                if (state.IsKeyDown(Keys.Down))
+                {
+                    this.speed = 4;
+                }
+            }
+
             if (this.position.X > 800)
             {
-                this.speed *= -1;
+                this.position.X = 400;
+                this.speed *= 0;
+                startOver = true;
             }
             else if (this.position.X < 0)
             {
-                this.speed *= -1;
+                this.position.X = 400;
+                this.speed *= 0;
+                startOver = true;
             }
 
             this.position.X += this.speed;

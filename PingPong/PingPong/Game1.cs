@@ -87,7 +87,6 @@ namespace PingPong
             this.playerPaddle.Update(gameTime);
             this.computerPaddle.Update(gameTime);
             this.ball.Update(gameTime);
-
             base.Update(gameTime);
         }
 
