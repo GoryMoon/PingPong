@@ -47,20 +47,6 @@ namespace PingPong.GameObjects
 
         public override void Update(GameTime gameTime)
         {
-            if (startOver == true)
-            {
-                KeyboardState state = Keyboard.GetState();
-
-                if (state.IsKeyDown(Keys.Up))
-                {
-                    this.speed = 4;
-                }
-
-                if (state.IsKeyDown(Keys.Down))
-                {
-                    this.speed = 4;
-                }
-            }
 
             if (this.position.X > 800)
             {
@@ -76,6 +62,21 @@ namespace PingPong.GameObjects
             }
 
             this.position.X += this.speed;
+
+            if (startOver == true)
+            {
+                KeyboardState state = Keyboard.GetState();
+
+                if (state.IsKeyDown(Keys.Up))
+                {
+                    this.speed = 4;
+                }
+
+                if (state.IsKeyDown(Keys.Down))
+                {
+                    this.speed = 4;
+                }
+            }
         }
 
         /// <summary>

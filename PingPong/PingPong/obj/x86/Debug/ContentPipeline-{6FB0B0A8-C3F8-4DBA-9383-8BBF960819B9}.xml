@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\ball.xnb</Output>
+      <Output>C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\bin\x86\Debug\Content\ball.xnb</Output>
       <Time>2015-03-05T14:21:54.9606259+01:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\pad.xnb</Output>
+      <Output>C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\bin\x86\Debug\Content\pad.xnb</Output>
       <Time>2015-03-05T14:21:54.9896276+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -26,10 +26,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPongContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPong\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPongContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

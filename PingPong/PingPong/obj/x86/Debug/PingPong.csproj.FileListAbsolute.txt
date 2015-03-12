@@ -22,3 +22,11 @@ C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug
 C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.exe
 C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.pdb
+C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\bin\x86\Debug\Content\ball.xnb
+C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\bin\x86\Debug\Content\pad.xnb
+C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\bin\x86\Debug\PingPong.exe
+C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\bin\x86\Debug\PingPong.pdb
+C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.csprojResolveAssemblyReference.cache
+C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.exe
+C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.pdb

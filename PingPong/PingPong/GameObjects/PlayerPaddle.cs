@@ -35,12 +35,12 @@ namespace PingPong.GameObjects
 
             if (state.IsKeyDown(Keys.Up) && this.position.Y > 0)
             {
-                this.position.Y -= 2;
+                this.position.Y -= 4;
             }
 
             if (state.IsKeyDown(Keys.Down) && this.position.Y < 480 - 150)
             {
-                this.position.Y += 2;
+                this.position.Y += 4;
             }
         }
     }
