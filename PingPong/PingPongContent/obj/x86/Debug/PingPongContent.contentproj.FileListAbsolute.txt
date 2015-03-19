@@ -1,5 +1,0 @@
-\\vmware-host\Shared Folders\Skrivbord\GitHub\PingPong\PingPong\PingPongContent\obj\x86\Debug\PingPongContent.contentprojResolveAssemblyReference.cache
-C:\Users\stEd2101\Documents\GitHub\PingPong\PingPong\PingPongContent\obj\x86\Debug\PingPongContent.contentprojResolveAssemblyReference.cache
-C:\Users\Jonathan Holm\Documents\GitHub\PingPong\PingPong\PingPongContent\obj\x86\Debug\PingPongContent.contentprojResolveAssemblyReference.cache
-C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPongContent\obj\x86\Debug\PingPongContent.contentprojResolveAssemblyReference.cache
-\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\PingPong\PingPong\PingPongContent\obj\x86\Debug\PingPongContent.contentprojResolveAssemblyReference.cache
