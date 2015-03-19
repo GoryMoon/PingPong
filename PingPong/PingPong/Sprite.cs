@@ -28,4 +28,6 @@ public class Sprite
         this.Height = height;
         this.Position = position;
     }
+
+    public Vector2 Pos { get { return Position; } }
 }

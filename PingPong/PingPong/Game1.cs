@@ -24,7 +24,7 @@ namespace PingPong
         // Game objects
         PlayerPaddle playerPaddle;
         ComputerPaddle computerPaddle;
-        Ball ball;
+        public Ball ball;
 
         SoundEffect pingPongSound;
 
@@ -36,7 +36,7 @@ namespace PingPong
             // Create game objects
             this.playerPaddle = new PlayerPaddle(this, 100f, 100f);
             this.computerPaddle = new ComputerPaddle(this, 700f, 100f);
-            this.ball = new Ball(this, 100f, 100f);
+            this.ball = new Ball(this, 100f, 300f);
         }
 
         /// <summary>

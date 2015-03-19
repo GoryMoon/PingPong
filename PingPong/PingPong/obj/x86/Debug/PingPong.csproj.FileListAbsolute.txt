@@ -38,3 +38,12 @@ C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debu
 C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.exe
 C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.pdb
+\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\PingPong\PingPong\PingPong\bin\x86\Debug\Content\ball.xnb
+\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\PingPong\PingPong\PingPong\bin\x86\Debug\Content\pad.xnb
+\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\PingPong\PingPong\PingPong\bin\x86\Debug\Content\PingPongSound.xnb
+\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\PingPong\PingPong\PingPong\bin\x86\Debug\PingPong.exe
+\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\PingPong\PingPong\PingPong\bin\x86\Debug\PingPong.pdb
+\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\PingPong\PingPong\PingPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.exe
+\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.pdb

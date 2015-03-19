@@ -16,7 +16,7 @@ namespace PingPong.GameObjects
     /// <summary>
     /// Ball object
     /// </summary>
-    class Ball : GameObject
+    public class Ball : GameObject
     {
         private Texture2D spriteTexture;
         public int speed = 5;

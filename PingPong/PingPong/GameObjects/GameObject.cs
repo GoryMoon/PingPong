@@ -12,7 +12,7 @@ namespace PingPong.GameObjects
     /// <summary>
     /// Base class for all game objects on screen
     /// </summary>
-    abstract class GameObject : Sprite
+    public abstract class GameObject : Sprite
     {
         protected Vector2 position;
         protected Game game;
