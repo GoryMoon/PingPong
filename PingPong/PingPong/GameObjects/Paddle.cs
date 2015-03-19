@@ -25,7 +25,7 @@ namespace PingPong.GameObjects
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public Paddle(Game game, float x, float y) : base(game, x, y)
+        public Paddle(Game game, float x, float y) : base(game, x, y, 38, 150)
         {
 
         }

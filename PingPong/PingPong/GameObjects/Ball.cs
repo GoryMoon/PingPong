@@ -19,14 +19,14 @@ namespace PingPong.GameObjects
     class Ball : GameObject
     {
         private Texture2D spriteTexture;
-        private int speed = 5;
+        public int speed = 5;
 
         /// <summary>
         /// Create a new player paddle at a specified position
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public Ball(Game game, float x, float y) : base(game, x, y)
+        public Ball(Game game, float x, float y) : base(game, x, y, 38, 38)
         {
 
         }
@@ -70,13 +70,17 @@ namespace PingPong.GameObjects
                 if (state.IsKeyDown(Keys.Up))
                 {
                     this.speed = 4;
+                    startOver = false;
                 }
 
                 if (state.IsKeyDown(Keys.Down))
                 {
                     this.speed = 4;
+                    startOver = false;
                 }
             }
+            this.Position.X = this.position.X;
+            this.Position.Y = this.position.Y;
         }
 
         /// <summary>

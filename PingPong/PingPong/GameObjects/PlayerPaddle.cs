@@ -42,6 +42,9 @@ namespace PingPong.GameObjects
             {
                 this.position.Y += 4;
             }
+            this.Position.X = this.position.X;
+            this.Position.Y = this.position.Y;
         }
+
     }
 }

@@ -30,3 +30,11 @@ C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong
 C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.exe
 C:\Users\Jonathan Holm\Desktop\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.pdb
+C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\ball.xnb
+C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\pad.xnb
+C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\Content\PingPongSound.xnb
+C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\PingPong.exe
+C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\bin\x86\Debug\PingPong.pdb
+C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.exe
+C:\Users\Marco Koivisto\Documents\GitHub\PingPong\PingPong\PingPong\obj\x86\Debug\PingPong.pdb

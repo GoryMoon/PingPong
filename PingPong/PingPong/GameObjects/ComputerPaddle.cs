@@ -32,6 +32,8 @@ namespace PingPong.GameObjects
         override public void Update(GameTime gameTime)
         {
             // todo: AI
+            this.Position.X = this.position.X;
+            this.Position.Y = this.position.Y;
         }
     }
 }

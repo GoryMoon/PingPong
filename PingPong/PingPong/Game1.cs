@@ -25,7 +25,8 @@ namespace PingPong
         PlayerPaddle playerPaddle;
         ComputerPaddle computerPaddle;
         Ball ball;
-        
+
+        SoundEffect pingPongSound;
 
         public Game1()
         {
@@ -61,6 +62,26 @@ namespace PingPong
             this.playerPaddle.LoadContent();
             this.computerPaddle.LoadContent();
             this.ball.LoadContent();
+            pingPongSound = Content.Load<SoundEffect>("PingPongSound");
+        }
+
+        /// <summary>
+        /// Sprite
+        /// </summary>
+        private void HandleCollisions()
+        {
+            // Player paddle collides with the ball
+            if (this.computerPaddle.BoundingBox.Intersects(this.ball.BoundingBox))
+            {
+                this.ball.speed *= -1;
+                pingPongSound.Play();
+
+            }
+            if (this.playerPaddle.BoundingBox.Intersects(this.ball.BoundingBox))
+            {
+                this.ball.speed *= -1;
+                pingPongSound.Play();
+            }
         }
 
         /// <summary>
@@ -88,6 +109,7 @@ namespace PingPong
             this.computerPaddle.Update(gameTime);
             this.ball.Update(gameTime);
             base.Update(gameTime);
+            HandleCollisions();
         }
 
         /// <summary>

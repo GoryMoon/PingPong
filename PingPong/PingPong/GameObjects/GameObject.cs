@@ -12,7 +12,7 @@ namespace PingPong.GameObjects
     /// <summary>
     /// Base class for all game objects on screen
     /// </summary>
-    abstract class GameObject
+    abstract class GameObject : Sprite
     {
         protected Vector2 position;
         protected Game game;
@@ -23,7 +23,7 @@ namespace PingPong.GameObjects
         /// <param name="game"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public GameObject(Game game, float x, float y)
+        public GameObject(Game game, float x, float y, int width, int height) : base(new Vector2(x, y), width, height)
         {
             this.game = game;
             this.position.X = x;
