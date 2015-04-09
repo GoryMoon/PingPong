@@ -73,13 +73,17 @@ namespace PingPong
             // Player paddle collides with the ball
             if (this.computerPaddle.BoundingBox.Intersects(this.ball.BoundingBox))
             {
-                this.ball.speed *= -1;
+                //this.ball.speed *= -1;
+                this.ball.SpeedX = -this.ball.SpeedX - this.ball.SpeedX / Math.Abs(this.ball.SpeedX);
+                this.ball.SpeedY *= this.ball.SpeedY - 2;
                 pingPongSound.Play();
 
             }
             if (this.playerPaddle.BoundingBox.Intersects(this.ball.BoundingBox))
             {
-                this.ball.speed *= -1;
+                //this.ball.speed *= -1; 
+                this.ball.SpeedX = -this.ball.SpeedX - this.ball.SpeedX / Math.Abs(this.ball.SpeedX);
+                this.ball.SpeedY *= this.ball.SpeedY - 2;
                 pingPongSound.Play();
             }
         }
