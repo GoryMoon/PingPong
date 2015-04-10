@@ -75,7 +75,7 @@ namespace PingPong
         }
 
         /// <summary>
-        /// Sprite
+        /// Collision with the ball
         /// </summary>
         private void HandleCollisions()
         {
@@ -83,6 +83,9 @@ namespace PingPong
             HandleCollision(playerPaddle);
         }
 
+	    /// <summary>
+	    /// Helper function for collision handling
+	    /// </summary
         private void HandleCollision(Paddle paddle)
         {
             Rectangle r = Rectangle.Intersect(paddle.BoundingBox, ball.BoundingBox);
