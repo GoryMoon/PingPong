@@ -29,11 +29,11 @@ namespace PingPong.GameObjects
         /// Update game logic; move player paddle on key press
         /// </summary>
         /// <param name="gameTime"></param>
-        override public void Update(GameTime gameTime)
+        override public void Update(GameTime gameTime, GameWindow window)
         {
             Game1 game1 = (Game1)this.game;
 
-            if (game1.ball.speed > 0)
+            if (game1.ball.SpeedX > 0)
             {
 
                 if (Pos.Y < game1.ball.Pos.Y)

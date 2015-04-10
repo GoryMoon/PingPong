@@ -29,7 +29,7 @@ namespace PingPong.GameObjects
         /// Update game logic; move player paddle on key press
         /// </summary>
         /// <param name="gameTime"></param>
-        override public void Update(GameTime gameTime)
+        override public void Update(GameTime gameTime, GameWindow window)
         {
             KeyboardState state = Keyboard.GetState();
 
@@ -38,10 +38,11 @@ namespace PingPong.GameObjects
                 this.position.Y -= 4;
             }
 
-            if (state.IsKeyDown(Keys.Down) && this.position.Y < 480 - 150)
+            if (state.IsKeyDown(Keys.Down) && this.position.Y < window.ClientBounds.Height - spriteTexture.Height)
             {
                 this.position.Y += 4;
             }
+
             this.Position.X = this.position.X;
             this.Position.Y = this.position.Y;
         }

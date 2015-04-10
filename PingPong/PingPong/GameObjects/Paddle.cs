@@ -18,7 +18,7 @@ namespace PingPong.GameObjects
     /// </summary>
     abstract class Paddle : GameObject
     {
-        private Texture2D spriteTexture;
+        protected Texture2D spriteTexture;
 
         /// <summary>
         /// Create a new player paddle at a specified position

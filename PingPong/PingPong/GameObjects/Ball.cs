@@ -19,7 +19,8 @@ namespace PingPong.GameObjects
     public class Ball : GameObject
     {
         private Texture2D spriteTexture;
-        public int speed = 5;
+        private int speedX = 5;
+        private int speedY = 5;
 
         /// <summary>
         /// Create a new player paddle at a specified position
@@ -45,23 +46,35 @@ namespace PingPong.GameObjects
         /// <param name="gameTime"></param>
         bool startOver=false;
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, GameWindow window)
         {
 
-            if (this.position.X > 800)
+            if (this.position.X > window.ClientBounds.Width)
             {
-                this.position.X = 400;
-                this.speed *= 0;
+                this.position.X = (window.ClientBounds.Width / 2) - (spriteTexture.Width / 2);
+                this.speedX = this.speedY *= 0;
                 startOver = true;
+                Game1.instance.playerScore += 1;
             }
             else if (this.position.X < 0)
             {
-                this.position.X = 400;
-                this.speed *= 0;
+                this.position.X = (window.ClientBounds.Width / 2) - (spriteTexture.Width / 2);
+                this.speedX = this.speedY *= 0;
                 startOver = true;
+                Game1.instance.computerScore += 1;
             }
 
-            this.position.X += this.speed;
+            if (this.position.Y > window.ClientBounds.Height - spriteTexture.Height)
+            {
+                this.speedY *= -1;
+            }
+            else if (this.position.Y < 0)
+            {
+                this.speedY *= -1;
+            }
+
+            this.position.X += this.speedX;
+            this.position.Y += this.speedY;
 
             if (startOver == true)
             {
@@ -69,13 +82,13 @@ namespace PingPong.GameObjects
 
                 if (state.IsKeyDown(Keys.Up))
                 {
-                    this.speed = 4;
+                    this.speedX = this.speedY = 5;
                     startOver = false;
                 }
 
                 if (state.IsKeyDown(Keys.Down))
                 {
-                    this.speed = 4;
+                    this.speedX = this.speedY = 5;
                     startOver = false;
                 }
             }
@@ -92,5 +105,10 @@ namespace PingPong.GameObjects
         {
             spriteBatch.Draw(this.spriteTexture, this.position, Color.White);
         }
+
+
+        public int SpeedX { get { return speedX; } set { speedX = value; } }
+        public int SpeedY { get { return speedY; } set { speedY = value; } }
     }
+
 }
