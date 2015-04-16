@@ -39,7 +39,7 @@ namespace PingPong.GameObjects
         /// Update the game logic. Move object, etc.
         /// </summary>
         /// <param name="gameTime"></param>
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, GameWindow window)
         {
             // Do nothing...
         }

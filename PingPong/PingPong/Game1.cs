@@ -27,6 +27,12 @@ namespace PingPong
         public Ball ball;
 
         SoundEffect pingPongSound;
+        SpriteFont highScore;
+
+        public static Game1 instance;
+
+        public int playerScore = 0;
+        public int computerScore = 0;
 
         public Game1()
         {
@@ -37,6 +43,8 @@ namespace PingPong
             this.playerPaddle = new PlayerPaddle(this, 100f, 100f);
             this.computerPaddle = new ComputerPaddle(this, 700f, 100f);
             this.ball = new Ball(this, 100f, 300f);
+
+            instance = this;
         }
 
         /// <summary>
@@ -63,27 +71,39 @@ namespace PingPong
             this.computerPaddle.LoadContent();
             this.ball.LoadContent();
             pingPongSound = Content.Load<SoundEffect>("PingPongSound");
+            highScore = Content.Load<SpriteFont>("HighScore");
         }
 
         /// <summary>
-        /// Sprite
+        /// Collision with the ball
         /// </summary>
         private void HandleCollisions()
         {
-            // Player paddle collides with the ball
-            if (this.computerPaddle.BoundingBox.Intersects(this.ball.BoundingBox))
-            {
-                //this.ball.speed *= -1;
-                this.ball.SpeedX = -this.ball.SpeedX - this.ball.SpeedX / Math.Abs(this.ball.SpeedX);
-                this.ball.SpeedY *= this.ball.SpeedY - 2;
-                pingPongSound.Play();
+            HandleCollision(computerPaddle);
+            HandleCollision(playerPaddle);
+        }
 
-            }
-            if (this.playerPaddle.BoundingBox.Intersects(this.ball.BoundingBox))
+	    /// <summary>
+	    /// Helper function for collision handling
+	    /// </summary
+        private void HandleCollision(Paddle paddle)
+        {
+            Rectangle r = Rectangle.Intersect(paddle.BoundingBox, ball.BoundingBox);
+
+            if (!r.IsEmpty)
             {
-                //this.ball.speed *= -1; 
-                this.ball.SpeedX = -this.ball.SpeedX - this.ball.SpeedX / Math.Abs(this.ball.SpeedX);
-                this.ball.SpeedY *= this.ball.SpeedY - 2;
+                this.ball.SpeedX *= -1;
+
+                if (r.Y + r.Height == (paddle.Pos.Y + paddle.Height))
+                {
+                    this.ball.SpeedY = 5;
+                }
+
+                if (r.Y == paddle.Pos.Y)
+                {
+                    this.ball.SpeedY = -5;
+                }
+
                 pingPongSound.Play();
             }
         }
@@ -109,9 +129,9 @@ namespace PingPong
                 this.Exit();
 
             // TODO: Add your update logic here
-            this.playerPaddle.Update(gameTime);
-            this.computerPaddle.Update(gameTime);
-            this.ball.Update(gameTime);
+            this.playerPaddle.Update(gameTime, Window);
+            this.computerPaddle.Update(gameTime, Window);
+            this.ball.Update(gameTime, Window);
             base.Update(gameTime);
             HandleCollisions();
         }
@@ -130,6 +150,9 @@ namespace PingPong
             this.playerPaddle.Draw(gameTime, this.spriteBatch);
             this.computerPaddle.Draw(gameTime, this.spriteBatch);
             this.ball.Draw(gameTime, this.spriteBatch);
+
+            spriteBatch.DrawString(highScore, "Player Score: " + playerScore, new Vector2(10, 10), Color.Black);
+            spriteBatch.DrawString(highScore, "Computer Score: " + computerScore, new Vector2(Window.ClientBounds.Width - 230, 10), Color.Black);
 
             this.spriteBatch.End();
             base.Draw(gameTime);
