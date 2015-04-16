@@ -85,7 +85,7 @@ namespace PingPong
 
 	    /// <summary>
 	    /// Helper function for collision handling
-	    /// </summary
+	    /// </summary>
         private void HandleCollision(Paddle paddle)
         {
             Rectangle r = Rectangle.Intersect(paddle.BoundingBox, ball.BoundingBox);

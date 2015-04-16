@@ -19,17 +19,9 @@ namespace PingPong.GameObjects
     public class Ball : GameObject
     {
         private Texture2D spriteTexture;
-<<<<<<< HEAD
-        public int speed = 1;
-        private int speedX;
-        private int speedY;
-=======
         private int speedX = 5;
         private int speedY = 5;
->>>>>>> origin/master
 
-        public int SpeedX { get {return speedX; } set { speedX = value; } }
-        public int SpeedY { get {return speedY; } set { speedY = value; } }
         /// <summary>
         /// Create a new player paddle at a specified position
         /// </summary>
@@ -37,8 +29,6 @@ namespace PingPong.GameObjects
         /// <param name="y"></param>
         public Ball(Game game, float x, float y) : base(game, x, y, 38, 38)
         {
-            speedX = speed;
-            speedY = speed;
         }
 
         /// <summary>
@@ -73,28 +63,16 @@ namespace PingPong.GameObjects
                 Game1.instance.computerScore += 1;
             }
 
-<<<<<<< HEAD
-            if (this.position.Y < 0)
-            {
-                this.speedY *= -1;   
-            }
 
-            else if (this.position.Y > 430)
-=======
             if (this.position.Y > window.ClientBounds.Height - spriteTexture.Height)
             {
                 this.speedY *= -1;
             }
             else if (this.position.Y < 0)
->>>>>>> origin/master
             {
                 this.speedY *= -1;
             }
 
-<<<<<<< HEAD
-            //this.position.X += this.speed;
-=======
->>>>>>> origin/master
             this.position.X += this.speedX;
             this.position.Y += this.speedY;
 
