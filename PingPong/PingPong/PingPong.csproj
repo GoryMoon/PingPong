@@ -78,10 +78,15 @@
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\Paddle.cs" />
     <Compile Include="GameObjects\PlayerPaddle.cs" />
+    <Compile Include="GameObjects\Property.cs" />
+    <Compile Include="GameStates\GameState.cs" />
+    <Compile Include="GameStates\GameStateHandler.cs" />
+    <Compile Include="GameStates\LoadingGameState.cs" />
+    <Compile Include="GameStates\MainGameState.cs" />
+    <Compile Include="GameStates\MenuGameState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

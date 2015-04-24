@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using PingPong.GameStates;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
@@ -12,10 +14,11 @@ namespace PingPong.GameObjects
     /// <summary>
     /// Base class for all game objects on screen
     /// </summary>
-    public abstract class GameObject : Sprite
+    public abstract class GameObject
     {
-        protected Vector2 position;
-        protected Game game;
+        private Vector2 position;
+        protected GameState game;
+        protected Texture2D spriteTexture;
 
         /// <summary>
         /// Initialize a new game object
@@ -23,7 +26,7 @@ namespace PingPong.GameObjects
         /// <param name="game"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public GameObject(Game game, float x, float y, int width, int height) : base(new Vector2(x, y), width, height)
+        public GameObject(GameState game, float x, float y)
         {
             this.game = game;
             this.position.X = x;
@@ -33,22 +36,35 @@ namespace PingPong.GameObjects
         /// <summary>
         /// Load the sprites and store them somewhere
         /// </summary>
-        public abstract void LoadContent();
+        public abstract void LoadContent(ContentManager content);
 
         /// <summary>
         /// Update the game logic. Move object, etc.
         /// </summary>
         /// <param name="gameTime"></param>
-        public virtual void Update(GameTime gameTime, GameWindow window)
-        {
-            // Do nothing...
-        }
+        public abstract void Update(GameTime gameTime, GameWindow window);
 
         /// <summary>
         /// Draw the game object on screen using spriteBatch
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="spriteBatch"></param>
-        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(this.spriteTexture, this.Pos, Color.White);
+        }
+
+        public Rectangle BoundingBox
+        {
+            get { return new Rectangle((int)position.X, (int)position.Y, spriteTexture.Width, spriteTexture.Height); }
+        }
+
+        public Vector2 Pos { get { return position; } }
+
+        public float X { get { return position.X; } set { position.X = value; } }
+        public float Y { get { return position.Y; } set { position.Y = value; } }
+        public float Width { get { return spriteTexture.Width; } }
+        public float Height { get { return spriteTexture.Height; } }
+
     }
 }

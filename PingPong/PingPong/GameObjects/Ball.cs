@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using PingPong.GameStates;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -18,63 +20,58 @@ namespace PingPong.GameObjects
     /// </summary>
     public class Ball : GameObject
     {
-        private Texture2D spriteTexture;
         private int speedX = 5;
         private int speedY = 5;
+        private bool startOver = false;
 
         /// <summary>
         /// Create a new player paddle at a specified position
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public Ball(Game game, float x, float y) : base(game, x, y, 38, 38)
+        public Ball(GameState game, float x, float y) : base(game, x, y)
         {
         }
 
         /// <summary>
         /// Load the sprite texture
         /// </summary>
-        public override void LoadContent()
+        public override void LoadContent(ContentManager content)
         {
-            this.spriteTexture = this.game.Content.Load<Texture2D>("ball");
+            this.spriteTexture = content.Load<Texture2D>("ball");
         }
 
         /// <summary>
         /// Update game logic. Move the ball
         /// </summary>
         /// <param name="gameTime"></param>
-        bool startOver=false;
-
         public override void Update(GameTime gameTime, GameWindow window)
         {
 
-            if (this.position.X > window.ClientBounds.Width)
+            if (this.X > window.ClientBounds.Width)
             {
-                this.position.X = (window.ClientBounds.Width / 2) - (spriteTexture.Width / 2);
+                this.X = (window.ClientBounds.Width / 2) - (spriteTexture.Width / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
-                Game1.instance.playerScore += 1;
+                game.set("playerScore", game.get<int>("playerScore") + 1);
             }
-            else if (this.position.X < 0)
+            else if (this.X < 0)
             {
-                this.position.X = (window.ClientBounds.Width / 2) - (spriteTexture.Width / 2);
+                this.X = (window.ClientBounds.Width / 2) - (spriteTexture.Width / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
-                Game1.instance.computerScore += 1;
+                game.set("computerScore", game.get<int>("computerScore") + 1);
             }
 
 
-            if (this.position.Y > window.ClientBounds.Height - spriteTexture.Height)
+            if (this.Y > window.ClientBounds.Height - spriteTexture.Height)
             {
                 this.speedY *= -1;
             }
-            else if (this.position.Y < 0)
+            else if (this.Y < 0)
             {
                 this.speedY *= -1;
             }
-
-            this.position.X += this.speedX;
-            this.position.Y += this.speedY;
 
             if (startOver == true)
             {
@@ -92,21 +89,10 @@ namespace PingPong.GameObjects
                     startOver = false;
                 }
             }
-            this.Position.X = this.position.X;
-            this.Position.Y = this.position.Y;
 
+            this.X += this.speedX;
+            this.Y += this.speedY;
         }
-
-        /// <summary>
-        /// Draw the paddle
-        /// </summary>
-        /// <param name="gameTime"></param>
-        /// <param name="spriteBatch"></param>
-        override public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(this.spriteTexture, this.position, Color.White);
-        }
-
 
         public int SpeedX { get { return speedX; } set { speedX = value; } }
         public int SpeedY { get { return speedY; } set { speedY = value; } }
