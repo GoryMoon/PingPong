@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 using PingPong.GameObjects;
 
@@ -14,10 +15,12 @@ namespace PingPong.GameStates
     public abstract class GameState
     {
 
-        public GameStateHandler handler;
+        public GameScreenHandler handler;
         public String name;
         protected Dictionary<String, Property> properties;
         public Property[] props;
+        private float windowWidth;
+        private float windowHeight;
 
         public GameState(String name)
         {
@@ -34,12 +37,14 @@ namespace PingPong.GameStates
         public abstract void draw(GameTime gameTime, SpriteBatch spriteBatch);
         public abstract void unload();
 
-        public void addHandler(GameStateHandler handler)
+        public void addHandler(GameScreenHandler handler)
         {
             this.handler = handler;
+            this.windowWidth = handler.game.Window.ClientBounds.Width;
+            this.windowHeight = handler.game.Window.ClientBounds.Height;
         }
 
-        public void add(Property prop)
+        public void add<T>(Property<T> prop)
         {
             properties.Add(prop.name, prop);
         }
@@ -57,6 +62,18 @@ namespace PingPong.GameStates
         public Property get(String name)
         {
             return properties[name];
+        }
+
+        public T put<T>(String name, T value) {
+            if (properties.ContainsKey(name) && get<T>(name) != null)
+	        {
+		        return get<T>(name);
+	        }
+            else
+	        {
+                getProp<T>(name).set(value);
+                return value;
+	        }
         }
 
         public void set<T>(String name, T value)
@@ -89,6 +106,8 @@ namespace PingPong.GameStates
 
         public ContentManager Content { get { return handler.game.Content; } }
         public GameWindow Window { get { return handler.game.Window; } }
+        public float WindowWidth { get { return windowWidth; } }
+        public float WindowHeight { get { return windowHeight; } }
 
     }
 }

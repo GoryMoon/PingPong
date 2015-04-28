@@ -9,16 +9,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PingPong.GameStates
 {
-    public class GameStateHandler
+    public class GameScreenHandler
     {
 
-        public Game1 game;
+        public volatile Game1 game;
         public GameState activeGameState;
         public GameState oldGameState;
         private Dictionary<String, GameState> gameStates;
         private GameState loaderState;
 
-        public GameStateHandler(Game1 game)
+        public GameScreenHandler(Game1 game)
         {
             this.game = game;
             this.gameStates = new Dictionary<string, GameState>();

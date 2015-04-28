@@ -54,11 +54,6 @@ namespace PingPong.GameObjects
             spriteBatch.Draw(this.spriteTexture, this.Pos, Color.White);
         }
 
-        public Rectangle BoundingBox
-        {
-            get { return new Rectangle((int)position.X, (int)position.Y, spriteTexture.Width, spriteTexture.Height); }
-        }
-
         public Vector2 Pos { get { return position; } }
 
         public float X { get { return position.X; } set { position.X = value; } }
@@ -66,5 +61,9 @@ namespace PingPong.GameObjects
         public float Width { get { return spriteTexture.Width; } }
         public float Height { get { return spriteTexture.Height; } }
 
+        public float Bottom { get { return Y + Height; } }
+        public float Top { get { return Y; } }
+        public float Left { get { return X; } }
+        public float Right { get { return X + Width; } }
     }
 }

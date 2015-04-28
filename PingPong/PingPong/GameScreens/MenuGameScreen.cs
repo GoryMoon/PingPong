@@ -10,10 +10,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PingPong.GameStates
 {
-    class MenuGameState: GameState
+    class MenuGameScreen: GameState
     {
+        public SpriteFont font;
+        int time;
 
-        public MenuGameState() :base("Menu")
+        public MenuGameScreen() :base("Menu")
         {
             add(new Property<int>("time", 0));
             add(new Property<SpriteFont>("font"));
@@ -21,30 +23,28 @@ namespace PingPong.GameStates
 
         public override void init()
         {
-            set("font", Content.Load<SpriteFont>("Font"));
+            font = put("font", Content.Load<SpriteFont>("Font"));
         }
 
         public override void unload()
         {
-            
+            set("font", font);
+            time = 0;
         }
 
         public override void update(GameTime gameTime)
         {
-            int time = get<int>("time");
-
-            if (time >= 200)
+            if (time >= 100)
             {
                 handler.changeTo("Main");
+                return;
             }
             time++;
-
-            set("time", time);
         }
 
         public override void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(get<SpriteFont>("font"), "Hello World: " + get<int>("time"), new Vector2(300, 300), Color.White);
+            spriteBatch.DrawString(font, "Hello World: " + time, new Vector2(300, 300), Color.White);
         }
 
     }

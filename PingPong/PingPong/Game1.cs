@@ -23,7 +23,7 @@ namespace PingPong
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public GameStateHandler handler;
+        public GameScreenHandler handler;
         private bool loadedFirst;
         
 
@@ -31,6 +31,17 @@ namespace PingPong
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            //SetFrameRate(graphics, 1000);
+
+            Components.Add(new FrameRateCounter(this));
+        }
+
+        public void SetFrameRate(GraphicsDeviceManager manager, int frames)
+        {
+            double dt = (double)1000 / (double)frames;
+            manager.SynchronizeWithVerticalRetrace = false;
+            this.TargetElapsedTime = TimeSpan.FromMilliseconds(dt);
+            manager.ApplyChanges();
         }
 
         /// <summary>
@@ -41,10 +52,10 @@ namespace PingPong
         /// </summary>
         protected override void Initialize()
         {
-            handler = new GameStateHandler(this);
-            handler.registerGameState(new MainGameState());
-            handler.registerGameState(new MenuGameState());
-            handler.setLoadingState(new LoadingGameState());
+            handler = new GameScreenHandler(this);
+            handler.registerGameState(new MainGameScreen());
+            handler.registerGameState(new MenuGameScreen());
+            handler.setLoadingState(new LoadingGameScreen());
             
             base.Initialize();
         }

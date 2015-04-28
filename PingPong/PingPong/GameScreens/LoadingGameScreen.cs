@@ -10,10 +10,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PingPong.GameStates
 {
-    public class LoadingGameState: GameState
+    public class LoadingGameScreen: GameState
     {
 
-        public LoadingGameState() :base("Loading")
+        public LoadingGameScreen() :base("Loading")
         {
             add(new Property<int>("time", 0));
             add(new Property<String>("dots", "."));

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 using PingPong.GameObjects;
 
@@ -11,11 +12,18 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace PingPong.GameStates
 {
-    public class MainGameState: GameState
+    public class MainGameScreen: GameState
     {
 
-        public MainGameState()
-            : base("Main")
+        public PlayerPaddle player;
+        public ComputerPaddle computer;
+        public Ball ball;
+        public SoundEffect ping;
+        public SpriteFont font;
+        public int playerScore;
+        public int computerScore;
+
+        public MainGameScreen() :base("Main")
         {
             add(new Property<PlayerPaddle>("player"));
             add(new Property<ComputerPaddle>("computer"));
@@ -28,20 +36,29 @@ namespace PingPong.GameStates
 
         public override void init()
         {
-            set("player", new PlayerPaddle(this, 100f, 100f));
-            set("computer", new ComputerPaddle(this, 700f, 100f));
-            set("ball", new Ball(this, 300f, 300f));
-            set("ping", Content.Load<SoundEffect>("PingPongSound"));
-            set("font", Content.Load<SpriteFont>("Font"));
+            player = put("player", new PlayerPaddle(this, 25f, 100f));
+            computer = put("computer", new ComputerPaddle(this, WindowWidth - 25f - 38f, 100f));
+            ball = put("ball", new Ball(this, 300f, 300f));
+            ping = put("ping", Content.Load<SoundEffect>("PingPongSound"));
+            font = put("font", Content.Load<SpriteFont>("Font"));
+            playerScore = put("playerScore", 0);
+            computerScore = put("computerScore", 0);
 
             get<PlayerPaddle>("player").LoadContent(Content);
             get<ComputerPaddle>("computer").LoadContent(Content);
             get<Ball>("ball").LoadContent(Content);
+
         }
 
         public override void unload()
         {
-
+            set("player", player);
+            set("computer", computer);
+            set("ball", ball);
+            set("ping", ping);
+            set("font", font);
+            set("playerScore", playerScore);
+            set("computerScore", computerScore);
         }
 
         /// <summary>
@@ -49,8 +66,8 @@ namespace PingPong.GameStates
         /// </summary>
         private void HandleCollisions()
         {
-            HandleCollision(get<ComputerPaddle>("computer"));
-            HandleCollision(get<PlayerPaddle>("player"));
+            HandleCollision(computer);
+            HandleCollision(player);
         }
 
         /// <summary>
@@ -58,8 +75,7 @@ namespace PingPong.GameStates
         /// </summary>
         private void HandleCollision(Paddle paddle)
         {
-            Ball ball = get<Ball>("ball");
-            Rectangle r = Rectangle.Intersect(paddle.BoundingBox, ball.BoundingBox);
+            /*Rectangle r = Rectangle.Intersect(paddle.BoundingBox, ball.BoundingBox);
 
             if (!r.IsEmpty)
             {
@@ -77,29 +93,27 @@ namespace PingPong.GameStates
 
                 set("ball", ball);
                 get<SoundEffect>("ping").Play();
-            }
+            }*/
         }
 
         public override void update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-            get<PlayerPaddle>("player").Update(gameTime, Window);
-            get<ComputerPaddle>("computer").Update(gameTime, Window);
-            get<Ball>("ball").Update(gameTime, Window);
+            player.Update(gameTime, Window);
+            computer.Update(gameTime, Window);
+            ball.Update(gameTime, Window);
             HandleCollisions();
         }
 
         public override void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             // Draw game objects
-            get<PlayerPaddle>("player").Draw(gameTime, spriteBatch);
-            get<ComputerPaddle>("computer").Draw(gameTime, spriteBatch);
-            get<Ball>("ball").Draw(gameTime, spriteBatch);
+            player.Draw(gameTime, spriteBatch);
+            computer.Draw(gameTime, spriteBatch);
+            ball.Draw(gameTime, spriteBatch);
 
-            SpriteFont font = get<SpriteFont>("font");
-
-            spriteBatch.DrawString(font, "Player Score: " + get<int>("playerScore"), new Vector2(10, 10), Color.Black);
-            spriteBatch.DrawString(font, "Computer Score: " + get<int>("computerScore"), new Vector2(Window.ClientBounds.Width - 230, 10), Color.Black);
+            spriteBatch.DrawString(font, "Player Score: " + playerScore, new Vector2(10, 10), Color.Black);
+            spriteBatch.DrawString(font, "Computer Score: " + computerScore, new Vector2(Window.ClientBounds.Width - 230, 10), Color.Black);
         }
 
     }

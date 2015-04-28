@@ -38,7 +38,7 @@ namespace PingPong.GameObjects
 
             if (state.IsKeyDown(Keys.Up) && this.Pos.Y > 0)
             {
-                if (!(this.Y - 4 < ball.BoundingBox.Bottom && ((this.X <= ball.BoundingBox.Right && this.X + this.Width >= ball.BoundingBox.Right) || (this.X <= ball.X && this.X + this.Width >= ball.X))))
+                if (!(this.Y - 4 < ball.Bottom && ((this.X <= ball.Right && this.X + this.Width >= ball.Right) || (this.X <= ball.X && this.X + this.Width >= ball.X))))
                 {
                     this.Y -= 4;
                 }
@@ -46,7 +46,7 @@ namespace PingPong.GameObjects
 
             if (state.IsKeyDown(Keys.Down) && this.Pos.Y < window.ClientBounds.Height - spriteTexture.Height)
             {
-                if (!(this.BoundingBox.Bottom + 4 > ball.BoundingBox.Bottom && ((this.X <= ball.BoundingBox.Right && this.X + this.Width >= ball.BoundingBox.Right) || (this.X <= ball.X && this.X + this.Width >= ball.X))))
+                if (!(this.Bottom + 4 > ball.Bottom && ((this.X <= ball.Right && this.X + this.Width >= ball.Right) || (this.X <= ball.X && this.X + this.Width >= ball.X))))
                 {
                     this.Y += 4;
                 }

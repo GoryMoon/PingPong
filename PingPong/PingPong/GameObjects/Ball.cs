@@ -51,6 +51,7 @@ namespace PingPong.GameObjects
             if (this.X > window.ClientBounds.Width)
             {
                 this.X = (window.ClientBounds.Width / 2) - (spriteTexture.Width / 2);
+                this.Y = (window.ClientBounds.Height / 2) - (spriteTexture.Height / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
                 game.set("playerScore", game.get<int>("playerScore") + 1);
@@ -58,6 +59,7 @@ namespace PingPong.GameObjects
             else if (this.X < 0)
             {
                 this.X = (window.ClientBounds.Width / 2) - (spriteTexture.Width / 2);
+                this.Y = (window.ClientBounds.Height / 2) - (spriteTexture.Height / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
                 game.set("computerScore", game.get<int>("computerScore") + 1);
@@ -79,7 +81,7 @@ namespace PingPong.GameObjects
 
                 if (state.IsKeyDown(Keys.Up))
                 {
-                    this.speedX = this.speedY = 5;
+                    this.speedX = this.speedY = -5;
                     startOver = false;
                 }
 
