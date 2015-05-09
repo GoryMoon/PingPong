@@ -11,14 +11,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-using PingPong.GameStates;
+using PingPong.GameScreens;
 
 namespace PingPong.GameObjects
 {
     /// <summary>
     /// Base class for paddles
     /// </summary>
-    public abstract class Paddle : GameObject
+    public abstract class Paddle : AdvCollision
     {
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace PingPong.GameObjects
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public Paddle(GameState game, float x, float y) : base(game, x, y)
+        public Paddle(GameScreen game, float x, float y) : base(game, x, y)
         {
 
         }
@@ -37,6 +37,7 @@ namespace PingPong.GameObjects
         public override void LoadContent(ContentManager content)
         {
             this.spriteTexture = content.Load<Texture2D>("pad");
+            base.LoadContent(content);
         }
 
     }

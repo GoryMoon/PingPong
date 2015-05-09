@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PingPong.GameStates;
+using PingPong.GameScreens;
 
 using Microsoft.Xna.Framework;
 
@@ -11,10 +11,10 @@ namespace PingPong.GameObjects
 {
     public abstract class AdvCollision: GameObject
     {
-        public AdvCollision(GameState game, float x, float y)
+        public AdvCollision(GameScreen game, float x, float y)
             : base(game, x, y)
         {
-
+            
         }
 
         private Plane left;
@@ -23,14 +23,23 @@ namespace PingPong.GameObjects
         private Plane bottom;
         private Rectangle rect;
 
-        public Vector2 checkCollision(AdvCollision col)
+        public override void LoadContent(Microsoft.Xna.Framework.Content.ContentManager content)
         {
-           
-                return new Vector2();
+            left = new Plane(Vector3.Left, Width);
+            right = new Plane(Vector3.Right, Height);
+            top = new Plane(Vector3.Up, Width);
+            bottom = new Plane(Vector3.Down, Width);
         }
 
-        public Rectangle Bounding { get { return new Rectangle((int)X, (int)Y, (int)Width, (int)Height); } }
+        public Vector2 checkCollision(AdvCollision col)
+        {
+            BoundingBox b = new BoundingBox(new Vector3(col.X, col.Y, 0), new Vector3(col.Width, col.Height, 0));
 
-
+            if (this.right.Intersects(b) == PlaneIntersectionType.Front)
+            {
+                Console.WriteLine("Inter");
+            }
+            return new Vector2();
+        }
     }
 }

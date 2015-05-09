@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PingPong.GameStates;
+using PingPong.GameScreens;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -22,7 +22,7 @@ namespace PingPong.GameObjects
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public PlayerPaddle(GameState game, float x, float y) : base(game, x, y)
+        public PlayerPaddle(GameScreen game, float x, float y) : base(game, x, y)
         {
 
         }

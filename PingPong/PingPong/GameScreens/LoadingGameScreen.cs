@@ -8,33 +8,32 @@ using PingPong.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace PingPong.GameStates
+namespace PingPong.GameScreens
 {
-    public class LoadingGameScreen: GameState
+    public class LoadingGameScreen: GameScreen
     {
+        private int time;
+        private String dots = ".";
+        private SpriteFont font;
 
         public LoadingGameScreen() :base("Loading")
         {
-            add(new Property<int>("time", 0));
-            add(new Property<String>("dots", "."));
             add(new Property<SpriteFont>("font"));
         }
 
         public override void init()
         {
-            set("font", Content.Load<SpriteFont>("Font"));
+            font = put("font", Content.Load<SpriteFont>("Font"));
         }
 
         public override void unload()
         {
-
+            time = 0;
+            dots = ".";
         }
 
         public override void update(GameTime gameTime)
         {
-            int time = get<int>("time");
-            String dots = get<String>("dots");
-
             if (time >= 10)
             {
                 time = 0;
@@ -46,15 +45,12 @@ namespace PingPong.GameStates
                 }
             }
             time++;
-
-            set("time", time);
-            set("dots", dots);
         }
 
         public override void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            int h = get<SpriteFont>("font").LineSpacing;
-            spriteBatch.DrawString(get<SpriteFont>("font"), "Loading" + get<String>("dots"), new Vector2(10, Window.ClientBounds.Height - h), Color.White);
+            int h = font.LineSpacing;
+            spriteBatch.DrawString(font, "Loading" + dots, new Vector2(10, Window.ClientBounds.Height - h), Color.White);
         }
 
     }

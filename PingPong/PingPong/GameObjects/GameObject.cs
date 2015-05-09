@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PingPong.GameStates;
+using PingPong.GameScreens;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +17,7 @@ namespace PingPong.GameObjects
     public abstract class GameObject
     {
         private Vector2 position;
-        protected GameState game;
+        protected GameScreen game;
         protected Texture2D spriteTexture;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace PingPong.GameObjects
         /// <param name="game"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public GameObject(GameState game, float x, float y)
+        public GameObject(GameScreen game, float x, float y)
         {
             this.game = game;
             this.position.X = x;
@@ -65,5 +65,7 @@ namespace PingPong.GameObjects
         public float Top { get { return Y; } }
         public float Left { get { return X; } }
         public float Right { get { return X + Width; } }
+
+        public Rectangle Bounding { get { return new Rectangle((int)X, (int)Y, (int)Width, (int)Height); } }
     }
 }

@@ -10,9 +10,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 
-namespace PingPong.GameStates
+namespace PingPong.GameScreens
 {
-    public class MainGameScreen: GameState
+    public class MainGameScreen: GameScreen
     {
 
         public PlayerPaddle player;
@@ -44,9 +44,9 @@ namespace PingPong.GameStates
             playerScore = put("playerScore", 0);
             computerScore = put("computerScore", 0);
 
-            get<PlayerPaddle>("player").LoadContent(Content);
-            get<ComputerPaddle>("computer").LoadContent(Content);
-            get<Ball>("ball").LoadContent(Content);
+            player.LoadContent(Content);
+            computer.LoadContent(Content);
+            ball.LoadContent(Content);
 
         }
 
@@ -68,6 +68,9 @@ namespace PingPong.GameStates
         {
             HandleCollision(computer);
             HandleCollision(player);
+
+            //player.checkCollision(ball);
+
         }
 
         /// <summary>
@@ -75,7 +78,7 @@ namespace PingPong.GameStates
         /// </summary>
         private void HandleCollision(Paddle paddle)
         {
-            /*Rectangle r = Rectangle.Intersect(paddle.BoundingBox, ball.BoundingBox);
+            Rectangle r = Rectangle.Intersect(paddle.Bounding, ball.Bounding);
 
             if (!r.IsEmpty)
             {
@@ -93,7 +96,7 @@ namespace PingPong.GameStates
 
                 set("ball", ball);
                 get<SoundEffect>("ping").Play();
-            }*/
+            }
         }
 
         public override void update(GameTime gameTime)

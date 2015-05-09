@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PingPong.GameStates;
+using PingPong.GameScreens;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -18,7 +18,7 @@ namespace PingPong.GameObjects
     /// <summary>
     /// Ball object
     /// </summary>
-    public class Ball : GameObject
+    public class Ball : AdvCollision
     {
         private int speedX = 5;
         private int speedY = 5;
@@ -29,7 +29,7 @@ namespace PingPong.GameObjects
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public Ball(GameState game, float x, float y) : base(game, x, y)
+        public Ball(GameScreen game, float x, float y) : base(game, x, y)
         {
         }
 
@@ -39,6 +39,7 @@ namespace PingPong.GameObjects
         public override void LoadContent(ContentManager content)
         {
             this.spriteTexture = content.Load<Texture2D>("ball");
+            base.LoadContent(content);
         }
 
         /// <summary>

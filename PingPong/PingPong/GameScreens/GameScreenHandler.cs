@@ -7,70 +7,70 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace PingPong.GameStates
+namespace PingPong.GameScreens
 {
     public class GameScreenHandler
     {
 
-        public volatile Game1 game;
-        public GameState activeGameState;
-        public GameState oldGameState;
-        private Dictionary<String, GameState> gameStates;
-        private GameState loaderState;
+        public Game1 game;
+        public GameScreen activeGameScreen;
+        public GameScreen oldGameScreen;
+        private Dictionary<String, GameScreen> gameScreens;
+        private GameScreen loaderScreen;
 
         public GameScreenHandler(Game1 game)
         {
             this.game = game;
-            this.gameStates = new Dictionary<string, GameState>();
+            this.gameScreens = new Dictionary<String, GameScreen>();
         }
 
-        public void registerGameState(GameState gameState)
+        public void registerGameScreen(GameScreen gameScreen)
         {
-            gameState.addHandler(this);
-            gameStates.Add(gameState.name, gameState);
+            gameScreen.addHandler(this);
+            gameScreens.Add(gameScreen.name, gameScreen);
         }
 
-        public void setLoadingState(GameState state)
+        public void setLoadingScreen(GameScreen screen)
         {
-            state.addHandler(this);
-            this.loaderState = state;
-            this.loaderState.init();
+            screen.addHandler(this);
+            this.loaderScreen = screen;
+            this.loaderScreen.init();
         }
 
-        public bool changeTo(String gameState)
+        public bool changeTo(String gameScreen)
         {
-            GameState temp = gameStates[gameState];
+            GameScreen temp = gameScreens[gameScreen];
 
             if (temp != null)
             {
-                oldGameState = activeGameState;
-                activeGameState = loaderState;
-                new Task(() => { loadNewState(temp); }).Start();
+                oldGameScreen = activeGameScreen;
+                activeGameScreen = loaderScreen;
+                new Task(() => { loadNewScreen(temp); }).Start();
                 return true;
             }
 
             return false;
         }
 
-        private void loadNewState(GameState state)
+        private void loadNewScreen(GameScreen screen)
         {
-            if (oldGameState != null)
+            if (oldGameScreen != null)
             {
-                oldGameState.unload();
-                oldGameState.transfer(state);
+                oldGameScreen.unload();
+                oldGameScreen.transfer(screen);
             }
-            state.initState();
-            activeGameState = state;
+            screen.initScreen();
+            activeGameScreen = screen;
         }
 
-        public void updateGameState(GameTime time)
+        public void updateGameScreen(GameTime time)
         {
-            activeGameState.update(time);
+            activeGameScreen.update(time);
         }
 
-        public void drawGameState(GameTime gameTime, SpriteBatch batch)
+        public void drawGameScreen(GameTime gameTime, SpriteBatch batch)
         {
-            activeGameState.draw(gameTime, batch);
+            activeGameScreen.draw(gameTime, batch);
         }
 
     }

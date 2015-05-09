@@ -9,9 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-using PingPong.GameStates;
+using PingPong.GameScreens;
+using PingPong.Ui;
 
 using PingPong.GameObjects;
+using PingPong.Menus;
 
 namespace PingPong
 {
@@ -20,10 +22,11 @@ namespace PingPong
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public GameScreenHandler handler;
+        public MenuHandler menuHandler;
         private bool loadedFirst;
         
 
@@ -31,14 +34,14 @@ namespace PingPong
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            //SetFrameRate(graphics, 1000);
+            //SetFrameRate(graphics, 144);
 
             Components.Add(new FrameRateCounter(this));
         }
 
         public void SetFrameRate(GraphicsDeviceManager manager, int frames)
         {
-            double dt = (double)1000 / (double)frames;
+            double dt = Math.Floor((double)1000 / (double)frames);
             manager.SynchronizeWithVerticalRetrace = false;
             this.TargetElapsedTime = TimeSpan.FromMilliseconds(dt);
             manager.ApplyChanges();
@@ -53,9 +56,12 @@ namespace PingPong
         protected override void Initialize()
         {
             handler = new GameScreenHandler(this);
-            handler.registerGameState(new MainGameScreen());
-            handler.registerGameState(new MenuGameScreen());
-            handler.setLoadingState(new LoadingGameScreen());
+            handler.registerGameScreen(new MainGameScreen());
+            handler.registerGameScreen(new MenuGameScreen());
+            handler.setLoadingScreen(new LoadingGameScreen());
+
+            menuHandler = new MenuHandler(this);
+            menuHandler.registerMenu("Main", new MainMenu(300, 60, null));
             
             base.Initialize();
         }
@@ -96,7 +102,8 @@ namespace PingPong
                 handler.changeTo("Menu");
             }
 
-            handler.updateGameState(gameTime);
+            handler.updateGameScreen(gameTime);
+            menuHandler.updateMenu(gameTime);
 
             base.Update(gameTime);
         }
@@ -107,11 +114,12 @@ namespace PingPong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.GhostWhite);
 
             this.spriteBatch.Begin();
 
-            handler.drawGameState(gameTime, spriteBatch);
+            handler.drawGameScreen(gameTime, spriteBatch);
+            menuHandler.drawMenu(gameTime, spriteBatch);
 
             this.spriteBatch.End();
             base.Draw(gameTime);

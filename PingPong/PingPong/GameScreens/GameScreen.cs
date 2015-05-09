@@ -10,9 +10,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace PingPong.GameStates
+namespace PingPong.GameScreens
 {
-    public abstract class GameState
+    public abstract class GameScreen
     {
 
         public GameScreenHandler handler;
@@ -22,13 +22,13 @@ namespace PingPong.GameStates
         private float windowWidth;
         private float windowHeight;
 
-        public GameState(String name)
+        public GameScreen(String name)
         {
             this.name = name;
             properties = new Dictionary<string,Property>();
         }
 
-        public void initState()
+        public void initScreen()
         {
             init();
         }
@@ -89,7 +89,7 @@ namespace PingPong.GameStates
             
         }
 
-        public void transfer(GameState state)
+        public void transfer(GameScreen state)
         {
             foreach (KeyValuePair<String, Property> item in properties)
             {

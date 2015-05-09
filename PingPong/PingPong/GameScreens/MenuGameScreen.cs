@@ -7,44 +7,44 @@ using PingPong.GameObjects;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using PingPong.Ui;
+using PingPong.Events;
+using PingPong.Menus;
 
-namespace PingPong.GameStates
+namespace PingPong.GameScreens
 {
-    class MenuGameScreen: GameState
+    class MenuGameScreen: GameScreen
     {
         public SpriteFont font;
-        int time;
+        public SpriteFont buttonFont;
 
         public MenuGameScreen() :base("Menu")
         {
             add(new Property<int>("time", 0));
             add(new Property<SpriteFont>("font"));
+            add(new Property<SpriteFont>("buttonFont"));
         }
 
         public override void init()
         {
+            handler.game.IsMouseVisible = true;
             font = put("font", Content.Load<SpriteFont>("Font"));
+            handler.game.menuHandler.changeTo("Main");
         }
 
         public override void unload()
         {
-            set("font", font);
-            time = 0;
+            handler.game.IsMouseVisible = false;
         }
 
         public override void update(GameTime gameTime)
         {
-            if (time >= 100)
-            {
-                handler.changeTo("Main");
-                return;
-            }
-            time++;
+
         }
 
         public override void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, "Hello World: " + time, new Vector2(300, 300), Color.White);
+
         }
 
     }
