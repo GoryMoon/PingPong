@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace PingPong.Ui
 {
@@ -23,6 +24,11 @@ namespace PingPong.Ui
         public float textHeight;
 
         public SpriteFont buttonFont;
+
+        protected KeyboardState keyboardState;
+        protected KeyboardState lastKeyboardState;
+
+        public bool loaded;
 
         public Menu(int x, int y)
             : this(x, y, null)
@@ -63,10 +69,13 @@ namespace PingPong.Ui
 
                 btn.LoadContent(Content);
             }
+            loaded = true;
         }
 
         public override void Update(GameTime gameTime, GameWindow window)
         {
+            lastKeyboardState = keyboardState;
+            keyboardState = Keyboard.GetState();
             foreach (Button btn in buttons)
             {
                 btn.Y = Y + textHeight + 5 + btn.id * 60;
@@ -81,7 +90,13 @@ namespace PingPong.Ui
             {
                 btn.Draw(gameTime, spriteBatch);
             }
-            if (name != null && name != "") spriteBatch.DrawString(buttonFont, name, new Vector2(X + (buttons.ElementAt(0).Width - buttonFont.MeasureString(name).X) / 2, Y), Color.Black);
+            if (name != null && name != "") spriteBatch.DrawString(buttonFont, name, new Vector2(X + (buttons.ElementAt(0).Width - buttonFont.MeasureString(name).X) / 2, Y), Color.White);
+        }
+
+        public void Unload()
+        {
+            buttons.Clear();
+            loaded = false;
         }
 
         public abstract void onButtonClick(Button btn);

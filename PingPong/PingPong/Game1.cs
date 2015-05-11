@@ -25,7 +25,7 @@ namespace PingPong
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public GameScreenHandler handler;
+        public GameScreenHandler screenHandler;
         public MenuHandler menuHandler;
         private bool loadedFirst;
         
@@ -55,13 +55,14 @@ namespace PingPong
         /// </summary>
         protected override void Initialize()
         {
-            handler = new GameScreenHandler(this);
-            handler.registerGameScreen(new MainGameScreen());
-            handler.registerGameScreen(new MenuGameScreen());
-            handler.setLoadingScreen(new LoadingGameScreen());
+            screenHandler = new GameScreenHandler(this);
+            screenHandler.registerGameScreen(new MainGameScreen());
+            screenHandler.registerGameScreen(new MenuGameScreen());
+            screenHandler.setLoadingScreen(new LoadingGameScreen());
 
             menuHandler = new MenuHandler(this);
-            menuHandler.registerMenu("Main", new MainMenu(300, 60, null));
+            menuHandler.registerMenu("Main", new MainMenu(300, 60));
+            menuHandler.registerMenu("Options", new OptionsMenu(300, 60));
             
             base.Initialize();
         }
@@ -92,17 +93,13 @@ namespace PingPong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                this.Exit();
-
             if (!loadedFirst)
             {
                 loadedFirst = true;
-                handler.changeTo("Menu");
+                screenHandler.changeTo("Menu");
             }
 
-            handler.updateGameScreen(gameTime);
+            screenHandler.updateGameScreen(gameTime);
             menuHandler.updateMenu(gameTime);
 
             base.Update(gameTime);
@@ -114,11 +111,11 @@ namespace PingPong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.GhostWhite);
+            GraphicsDevice.Clear(Color.Black);
 
             this.spriteBatch.Begin();
 
-            handler.drawGameScreen(gameTime, spriteBatch);
+            screenHandler.drawGameScreen(gameTime, spriteBatch);
             menuHandler.drawMenu(gameTime, spriteBatch);
 
             this.spriteBatch.End();

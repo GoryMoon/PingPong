@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PingPong.GameScreens;
 using PingPong.Ui;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace PingPong.Menus
 {
-    public class MainMenu: Menu
+    class OptionsMenu: Menu
     {
-        public MainMenu(int x, int y)
-            : base(x, y)
+        public OptionsMenu(int x, int y) : base(x, y, "Options")
         {
 
         }
@@ -24,15 +22,18 @@ namespace PingPong.Menus
         {
             base.LoadContent(Content);
 
-            addButton(new Button("Singleplayer"));
-            addButton(new Button("Multiplayer"));
-            addButton(new Button("Options"));
-            addButton(new Button("Exit"));
+            addButton(new Button("Back (Esc)"));
         }
 
         public override void Update(GameTime gameTime, GameWindow window)
         {
             base.Update(gameTime, window);
+
+            if (keyboardState.IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
+            {
+                handler.changeTo("Main", TransitionType.SLIDERIGHT);
+            }
+
         }
 
         public override void onButtonClick(Button btn)
@@ -40,22 +41,11 @@ namespace PingPong.Menus
             switch (btn.id)
             {
                 case 0:
-                    handler.changeTo("None");
-                    handler.game.screenHandler.changeTo("Main");
-                    break;
-                case 1:
-
-                    break;
-                case 2:
-                    handler.changeTo("Options", TransitionType.SLIDELEFT);
-                    break;
-                case 3:
-                    handler.game.Exit();
+                    handler.changeTo("Main", TransitionType.SLIDERIGHT);
                     break;
                 default:
                     break;
             }
         }
-
     }
 }

@@ -75,6 +75,7 @@
     <Compile Include="Events\ButtonEventHandler.cs" />
     <Compile Include="Menus\EmptyMenu.cs" />
     <Compile Include="Menus\MainMenu.cs" />
+    <Compile Include="Menus\OptionsMenu.cs" />
     <Compile Include="Ui\Button.cs" />
     <Compile Include="FrameRateCounter.cs" />
     <Compile Include="GameObjects\AdvCollision.cs" />
@@ -94,6 +95,12 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Ui\Menu.cs" />
     <Compile Include="Ui\MenuHandler.cs" />
+    <Compile Include="Ui\Transitions\SlideDown.cs" />
+    <Compile Include="Ui\Transitions\SlideRight.cs" />
+    <Compile Include="Ui\Transitions\SlideUp.cs" />
+    <Compile Include="Ui\Transitions\Transition.cs" />
+    <Compile Include="Ui\Transitions\None.cs" />
+    <Compile Include="Ui\Transitions\SlideLeft.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

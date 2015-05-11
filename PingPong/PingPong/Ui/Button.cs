@@ -99,7 +99,7 @@ namespace PingPong.Ui
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.isHovering ? this.hoverTexture: this.spriteTexture, Pos, Color.White);
-            spriteBatch.DrawString(font, text, textPos, isHovering ? Color.Gray: Color.White);
+            spriteBatch.DrawString(font, text, textPos, isHovering ? Color.Gray: Color.Black);
         }
 
     }
