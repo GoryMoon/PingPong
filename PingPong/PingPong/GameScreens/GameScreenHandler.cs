@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +18,7 @@ namespace PingPong.GameScreens
         public GameScreen oldGameScreen;
         private Dictionary<String, GameScreen> gameScreens;
         private GameScreen loaderScreen;
+        private Stopwatch sw = new Stopwatch();
 
         public GameScreenHandler(Game1 game)
         {
@@ -45,10 +47,11 @@ namespace PingPong.GameScreens
             {
                 oldGameScreen = activeGameScreen;
                 activeGameScreen = loaderScreen;
+                Log.debug("GameScreens: Changing GameScreen to [{0}]", gameScreen);
                 new Task(() => { loadNewScreen(temp); }).Start();
                 return true;
             }
-
+            Log.debug("GameScreens: Invalid GameScreen [{0}]", gameScreen);
             return false;
         }
 
@@ -59,8 +62,15 @@ namespace PingPong.GameScreens
                 oldGameScreen.unload();
                 oldGameScreen.transfer(screen);
             }
+            Log.debug("GameScreens: GameScreen [{0}] is now loading", screen.name);
+
+            sw.Reset();
+            sw.Start();
             screen.initScreen();
             activeGameScreen = screen;
+            sw.Stop();
+
+            Log.debug("GameScreens: GameScreen [{0}] loaded in {1}", screen.name, sw.Elapsed);
         }
 
         public void updateGameScreen(GameTime time)

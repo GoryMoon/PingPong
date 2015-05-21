@@ -52,28 +52,8 @@ with.
     -->
     <CharacterRegions>
       <CharacterRegion>
-        <Start>f</Start>
-        <End>f</End>
-      </CharacterRegion>
-      <CharacterRegion>
-        <Start>p</Start>
-        <End>p</End>
-      </CharacterRegion>
-      <CharacterRegion>
-        <Start>s</Start>
-        <End>s</End>
-      </CharacterRegion>
-      <CharacterRegion>
-        <Start>:</Start>
-        <End>:</End>
-      </CharacterRegion>
-      <CharacterRegion>
-        <Start> </Start>
-        <End> </End>
-      </CharacterRegion>
-      <CharacterRegion>
-        <Start>0</Start>
-        <End>9</End>
+        <Start>&#32;</Start>
+        <End>&#126;</End>
       </CharacterRegion>
     </CharacterRegions>
   </Asset>

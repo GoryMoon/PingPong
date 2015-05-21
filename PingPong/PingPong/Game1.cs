@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -23,12 +25,19 @@ namespace PingPong
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         public GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
+        public Camera2D camera;
 
         public GameScreenHandler screenHandler;
         public MenuHandler menuHandler;
         private bool loadedFirst;
-        
+        public Settings settings;
+
+        public static bool showDebug;
+        private Debug debug;
+
+        private KeyboardState lastKeyboardState;
+        private KeyboardState keyboardState;
 
         public Game1()
         {
@@ -36,7 +45,21 @@ namespace PingPong
             Content.RootDirectory = "Content";
             //SetFrameRate(graphics, 144);
 
+            Form gameForm = (Form)Form.FromHandle(Window.Handle);
+            gameForm.FormClosing += onClose;
+
+            graphics.PreferMultiSampling = true;
+
+            settings = new Settings("PingPongGame/pingpong.conf");
+
+            /*graphics.PreferredBackBufferHeight = 1200;
+            graphics.PreferredBackBufferWidth = 1600;
+            graphics.ApplyChanges();
+
             Components.Add(new FrameRateCounter(this));
+            camera = new Camera2D();
+            camera.Pos = new Vector2(800, 600);*/
+            //camera.Zoom = 2f;
         }
 
         public void SetFrameRate(GraphicsDeviceManager manager, int frames)
@@ -61,9 +84,10 @@ namespace PingPong
             screenHandler.setLoadingScreen(new LoadingGameScreen());
 
             menuHandler = new MenuHandler(this);
-            menuHandler.registerMenu("Main", new MainMenu(300, 60));
+            menuHandler.registerMenu("Main", new PingPong.Menus.MainMenu(300, 60));
             menuHandler.registerMenu("Options", new OptionsMenu(300, 60));
-            
+
+            debug = new Debug();
             base.Initialize();
         }
 
@@ -75,6 +99,7 @@ namespace PingPong
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            debug.LoadContent(Content);
         }
 
         /// <summary>
@@ -84,6 +109,17 @@ namespace PingPong
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+        }
+
+        public void onClose(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            settings.save();
+        }
+
+        public void ExitApplication()
+        {
+            settings.save();
+            Exit();
         }
 
         /// <summary>
@@ -97,6 +133,19 @@ namespace PingPong
             {
                 loadedFirst = true;
                 screenHandler.changeTo("Menu");
+            }
+
+            lastKeyboardState = keyboardState;
+            keyboardState = Keyboard.GetState();
+
+            if (lastKeyboardState != null && lastKeyboardState.IsKeyUp(Microsoft.Xna.Framework.Input.Keys.F2) && keyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.F2))
+            {
+                showDebug = !showDebug;
+            }
+
+            if (showDebug)
+            {
+                debug.Update(gameTime, Window);
             }
 
             screenHandler.updateGameScreen(gameTime);
@@ -113,10 +162,16 @@ namespace PingPong
         {
             GraphicsDevice.Clear(Color.Black);
 
+            //this.spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, camera.get_transformation(GraphicsDevice));
             this.spriteBatch.Begin();
 
             screenHandler.drawGameScreen(gameTime, spriteBatch);
             menuHandler.drawMenu(gameTime, spriteBatch);
+
+            if (showDebug)
+            {
+                debug.Draw(gameTime, spriteBatch);
+            }
 
             this.spriteBatch.End();
             base.Draw(gameTime);

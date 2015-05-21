@@ -66,6 +66,6 @@ namespace PingPong.GameObjects
         public float Left { get { return X; } }
         public float Right { get { return X + Width; } }
 
-        public Rectangle Bounding { get { return new Rectangle((int)X, (int)Y, (int)Width, (int)Height); } }
+        public virtual Rectangle Bounding { get { return new Rectangle((int)X, (int)Y, (int)Width, (int)Height); } }
     }
 }

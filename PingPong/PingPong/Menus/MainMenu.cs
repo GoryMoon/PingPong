@@ -15,7 +15,7 @@ namespace PingPong.Menus
     public class MainMenu: Menu
     {
         public MainMenu(int x, int y)
-            : base(x, y)
+            : base(x, y, "MainMenu")
         {
 
         }
@@ -50,7 +50,7 @@ namespace PingPong.Menus
                     handler.changeTo("Options", TransitionType.SLIDELEFT);
                     break;
                 case 3:
-                    handler.game.Exit();
+                    handler.game.ExitApplication();
                     break;
                 default:
                     break;

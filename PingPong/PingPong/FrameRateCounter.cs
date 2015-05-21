@@ -56,10 +56,12 @@ namespace PingPong
             string fps = string.Format("fps: {0}", frameRate);
 
             spriteBatch.Begin();
-
-            spriteBatch.DrawString(font, fps, new Vector2(33, 33), Color.Black);
-            spriteBatch.DrawString(font, fps, new Vector2(32, 32), Color.White);
-
+            if (Game1.showDebug)
+            {
+                spriteBatch.DrawString(font, fps, new Vector2(23, 23), Color.Black);
+                spriteBatch.DrawString(font, fps, new Vector2(22, 22), Color.White);
+            }
+            
             spriteBatch.End();
         }
 

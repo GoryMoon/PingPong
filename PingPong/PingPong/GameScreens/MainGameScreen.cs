@@ -94,7 +94,6 @@ namespace PingPong.GameScreens
                     ball.SpeedY = -5;
                 }
 
-                set("ball", ball);
                 get<SoundEffect>("ping").Play();
             }
         }
@@ -115,8 +114,8 @@ namespace PingPong.GameScreens
             computer.Draw(gameTime, spriteBatch);
             ball.Draw(gameTime, spriteBatch);
 
-            spriteBatch.DrawString(font, "Player Score: " + playerScore, new Vector2(10, 10), Color.Black);
-            spriteBatch.DrawString(font, "Computer Score: " + computerScore, new Vector2(Window.ClientBounds.Width - 230, 10), Color.Black);
+            spriteBatch.DrawString(font, "Player Score: " + playerScore, new Vector2(10, 10), Color.White);
+            spriteBatch.DrawString(font, "Computer Score: " + computerScore, new Vector2(Window.ClientBounds.Width - 230, 10), Color.White);
         }
 
     }

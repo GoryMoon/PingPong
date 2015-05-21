@@ -36,7 +36,7 @@ namespace PingPong.GameObjects
             KeyboardState state = Keyboard.GetState();
             Ball ball = game.get<Ball>("ball");
 
-            if (state.IsKeyDown(Keys.Up) && this.Pos.Y > 0)
+            if (state.IsKeyDown(game.handler.game.settings.getKey("P1-U")) && this.Pos.Y > 0)
             {
                 if (!(this.Y - 4 < ball.Bottom && ((this.X <= ball.Right && this.X + this.Width >= ball.Right) || (this.X <= ball.X && this.X + this.Width >= ball.X))))
                 {
@@ -44,7 +44,7 @@ namespace PingPong.GameObjects
                 }
             }
 
-            if (state.IsKeyDown(Keys.Down) && this.Pos.Y < window.ClientBounds.Height - spriteTexture.Height)
+            if (state.IsKeyDown(game.handler.game.settings.getKey("P1-D")) && this.Pos.Y < window.ClientBounds.Height - spriteTexture.Height)
             {
                 if (!(this.Bottom + 4 > ball.Bottom && ((this.X <= ball.Right && this.X + this.Width >= ball.Right) || (this.X <= ball.X && this.X + this.Width >= ball.X))))
                 {

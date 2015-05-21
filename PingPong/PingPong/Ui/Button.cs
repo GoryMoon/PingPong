@@ -19,14 +19,14 @@ namespace PingPong.Ui
         public Texture2D hoverTexture;
         public SpriteFont font;
         public String text;
-        private Vector2 textPos;
-        private Vector2 textSize;
+        protected Vector2 textPos;
+        protected Vector2 textSize;
 
         public event EventHandler Click;
 
         MouseState mouseState;
 
-        private bool isHovering;
+        protected bool isHovering;
 
         public Button(int id, GameScreen game, float x, float y, String text, SpriteFont font): base(game, x, y)
         {
@@ -87,6 +87,7 @@ namespace PingPong.Ui
                     if (Click != null)
                     {
                         Click(this, EventArgs.Empty);
+                        onClick(this, EventArgs.Empty);
                     }
                 }
             }
@@ -96,10 +97,19 @@ namespace PingPong.Ui
             }
         }
 
+        public virtual void onClick(Button btn, EventArgs e) {
+
+        }
+
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.isHovering ? this.hoverTexture: this.spriteTexture, Pos, Color.White);
-            spriteBatch.DrawString(font, text, textPos, isHovering ? Color.Gray: Color.Black);
+            drawString(gameTime, spriteBatch);
+        }
+
+        public virtual void drawString(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(font, text, textPos, isHovering ? Color.Gray : Color.Black);
         }
 
     }

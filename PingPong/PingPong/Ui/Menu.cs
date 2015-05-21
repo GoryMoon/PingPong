@@ -21,6 +21,7 @@ namespace PingPong.Ui
 
         public MenuHandler handler;
         public String name;
+        public bool drawName;
         public float textHeight;
 
         public SpriteFont buttonFont;
@@ -28,22 +29,31 @@ namespace PingPong.Ui
         protected KeyboardState keyboardState;
         protected KeyboardState lastKeyboardState;
 
+        private Vector2 oldPos;
+        
         public bool loaded;
 
         public Menu(int x, int y)
-            : this(x, y, null)
+            : this(x, y, null, false)
         {
 
         }
 
+        public Menu(int x, int y, String name)
+            : this(x, y, name, false)
+        {
 
-        public Menu(int x, int y, String name) 
+        }
+
+        public Menu(int x, int y, String name, bool drawName) 
             : base(null, x, y)
         {
             this.name = name;
+            this.drawName = drawName;
             buttons = new HashSet<Button>();
             eventHandler = new ButtonEventHandler(buttons);
             eventHandler.Click += onButtonClick;
+            oldPos = Pos;
         }
 
         public void addHandler(MenuHandler handler)
@@ -59,7 +69,7 @@ namespace PingPong.Ui
         public void PostLoadContent(ContentManager Content)
         {
             int i = 0;
-            textHeight = (name != null && name != "") ? buttonFont.MeasureString(name).Y: 0;
+            textHeight = (name != null && name != "" && drawName) ? buttonFont.MeasureString(name).Y: 0;
             foreach (Button btn in buttons)
             {
                 btn.font = buttonFont;
@@ -74,13 +84,26 @@ namespace PingPong.Ui
 
         public override void Update(GameTime gameTime, GameWindow window)
         {
+            bool changedPos = false; ;
+            if (oldPos.X != X || oldPos.Y != Y)
+            {
+                changedPos = true;
+            }
+
             lastKeyboardState = keyboardState;
             keyboardState = Keyboard.GetState();
             foreach (Button btn in buttons)
             {
-                btn.Y = Y + textHeight + 5 + btn.id * 60;
-                btn.X = X;
+                if (changedPos)
+                {
+                    btn.Y = Y + textHeight + 5 + btn.id * 60;
+                    btn.X = X;
+                } 
                 btn.Update(gameTime, window);
+            }
+            if (changedPos)
+            {
+                oldPos = Pos;
             }
         }
 
@@ -90,7 +113,7 @@ namespace PingPong.Ui
             {
                 btn.Draw(gameTime, spriteBatch);
             }
-            if (name != null && name != "") spriteBatch.DrawString(buttonFont, name, new Vector2(X + (buttons.ElementAt(0).Width - buttonFont.MeasureString(name).X) / 2, Y), Color.White);
+            if (name != null && name != "" && drawName) spriteBatch.DrawString(buttonFont, name, new Vector2(X + (buttons.ElementAt(0).Width - buttonFont.MeasureString(name).X) / 2, Y), Color.White);
         }
 
         public void Unload()
@@ -106,6 +129,8 @@ namespace PingPong.Ui
             buttons.Add(btn);
             eventHandler.addButton(btn);
         }
+
+        public Settings Settings { get { return handler.game.settings; } }
 
     }
 }

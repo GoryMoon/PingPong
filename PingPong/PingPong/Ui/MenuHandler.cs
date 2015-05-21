@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -29,6 +30,8 @@ namespace PingPong.Ui
         private Dictionary<String, Menu> menus;
         private Dictionary<TransitionType, Transition> transitions;
 
+        private Stopwatch sw = new Stopwatch();
+
         private Transition activeTransition;
 
         public MenuHandler(Game1 game)
@@ -42,12 +45,20 @@ namespace PingPong.Ui
             transitions.Add(TransitionType.SLIDEDOWN, new SlideDown());
             transitions.Add(TransitionType.SLIDEUP, new SlideUp());
 
+            setupEmptyMenu();
+        }
+
+        private void setupEmptyMenu()
+        {
             registerMenu("None", new EmptyMenu());
-            changeTo("None");
+            activeMenu = menus["None"];
+            activeMenu.LoadContent(game.Content);
+            activeMenu.PostLoadContent(game.Content);
         }
 
         public void registerMenu(String name, Menu menu)
         {
+            Log.debug("MenuHandler: Registring menu [{0}]", name);
             menu.addHandler(this);
             menus.Add(name, menu);
         }
@@ -60,12 +71,20 @@ namespace PingPong.Ui
         public bool changeTo(String name, TransitionType transition) {
             Menu temp = menus[name];
 
-            if (temp != null)
+            if (temp != null && activeTransition == null)
             {
                 oldMenu = activeMenu;
+                Log.debug("MenuHandler: Changing Menu to [{0}]", name);
+                Log.debug("MenuHandler: Menu [{0}] started loading", name);
+
+                sw.Restart();
                 temp.LoadContent(game.Content);
                 temp.PostLoadContent(game.Content);
+                sw.Stop();
+                Log.debug("MenuHandler: Menu [{0}] loaded in {1}", name, sw.Elapsed);
+                
                 activeTransition = getTransition(transition);
+                Log.debug("MenuHandler: Running transition {0}", transition.ToString());
                 activeTransition.currentStatus = Status.PRESETUP;
                 activeMenu = temp;
             }
@@ -80,7 +99,11 @@ namespace PingPong.Ui
             if (oldMenu != null && oldMenu.loaded && activeTransition != null && activeTransition.currentStatus == Status.DONE)
             {
                 activeTransition.transition(oldMenu, activeMenu, gameTime);
+
+                Log.debug("MenuHandler: Menu [{0}] is unloading", oldMenu.name);
                 oldMenu.Unload();
+
+                Log.debug("MenuHandler: Done running transition {0}", transitions.FirstOrDefault(x => x.Value == activeTransition).Key.ToString());
                 activeTransition = null;
             }
 
@@ -100,7 +123,7 @@ namespace PingPong.Ui
         {
             if (activeTransition != null && (activeTransition.currentStatus == Status.PRESETUP || activeTransition.currentStatus == Status.SETUP))
             {
-                oldMenu.Draw(gameTime, spriteBatch);
+                if (oldMenu != null) oldMenu.Draw(gameTime, spriteBatch);
             }
             else
             {
@@ -109,7 +132,7 @@ namespace PingPong.Ui
 
             if (activeTransition != null && activeTransition.currentStatus == Status.RUNNING)
             {
-                oldMenu.Draw(gameTime, spriteBatch);
+                if (oldMenu != null) oldMenu.Draw(gameTime, spriteBatch);
             }
         }
 

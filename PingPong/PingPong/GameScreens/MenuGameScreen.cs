@@ -16,13 +16,10 @@ namespace PingPong.GameScreens
     class MenuGameScreen: GameScreen
     {
         public SpriteFont font;
-        public SpriteFont buttonFont;
 
         public MenuGameScreen() :base("Menu")
         {
-            add(new Property<int>("time", 0));
             add(new Property<SpriteFont>("font"));
-            add(new Property<SpriteFont>("buttonFont"));
         }
 
         public override void init()

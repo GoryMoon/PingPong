@@ -55,7 +55,7 @@ namespace PingPong.GameObjects
                 this.Y = (window.ClientBounds.Height / 2) - (spriteTexture.Height / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
-                game.set("playerScore", game.get<int>("playerScore") + 1);
+                ((MainGameScreen)game).playerScore += 1;
             }
             else if (this.X < 0)
             {
@@ -63,7 +63,7 @@ namespace PingPong.GameObjects
                 this.Y = (window.ClientBounds.Height / 2) - (spriteTexture.Height / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
-                game.set("computerScore", game.get<int>("computerScore") + 1);
+                ((MainGameScreen)game).computerScore += 1;
             }
 
 
@@ -80,13 +80,13 @@ namespace PingPong.GameObjects
             {
                 KeyboardState state = Keyboard.GetState();
 
-                if (state.IsKeyDown(Keys.Up))
+                if (state.IsKeyDown(game.handler.game.settings.getKey("P1-U")))
                 {
                     this.speedX = this.speedY = -5;
                     startOver = false;
                 }
 
-                if (state.IsKeyDown(Keys.Down))
+                if (state.IsKeyDown(game.handler.game.settings.getKey("P1-D")))
                 {
                     this.speedX = this.speedY = 5;
                     startOver = false;
