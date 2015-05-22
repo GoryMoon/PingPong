@@ -17,7 +17,7 @@ namespace PingPong.GameObjects
     public abstract class GameObject
     {
         private Vector2 position;
-        protected GameScreen game;
+        protected GameScreen gameScreen;
         protected Texture2D spriteTexture;
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace PingPong.GameObjects
         /// <param name="y"></param>
         public GameObject(GameScreen game, float x, float y)
         {
-            this.game = game;
+            this.gameScreen = game;
             this.position.X = x;
             this.position.Y = y;
         }

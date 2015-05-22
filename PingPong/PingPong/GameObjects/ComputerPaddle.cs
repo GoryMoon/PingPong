@@ -33,14 +33,14 @@ namespace PingPong.GameObjects
         /// <param name="gameTime"></param>
         override public void Update(GameTime gameTime, GameWindow window)
         {
-            if (game.get<Ball>("ball").SpeedX > 0)
+            if (gameScreen.get<Ball>("ball").SpeedX > 0)
             {
 
-                if (Pos.Y < game.get<Ball>("ball").Pos.Y)
+                if (Pos.Y < gameScreen.get<Ball>("ball").Pos.Y)
                 {
                     this.Y += 2;
                 }
-                else if (Pos.Y > game.get<Ball>("ball").Pos.Y)
+                else if (Pos.Y > gameScreen.get<Ball>("ball").Pos.Y)
                 {
                     this.Y -= 2;
                 }

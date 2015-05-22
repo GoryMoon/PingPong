@@ -26,12 +26,12 @@ namespace PingPong
     {
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
-        public Camera2D camera;
-
+        
         public GameScreenHandler screenHandler;
         public MenuHandler menuHandler;
         private bool loadedFirst;
         public Settings settings;
+        public InputManager inputManager;
 
         public static bool showDebug;
         private Debug debug;
@@ -39,27 +39,39 @@ namespace PingPong
         private KeyboardState lastKeyboardState;
         private KeyboardState keyboardState;
 
+        private Texture2D cursor;
+        private Vector2 cursorPos;
+        public bool showCursor;
+
+        private static float windowWidth;
+        private static float windowHeight;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsFixedTimeStep = false;
             //SetFrameRate(graphics, 144);
 
             Form gameForm = (Form)Form.FromHandle(Window.Handle);
             gameForm.FormClosing += onClose;
-
-            graphics.PreferMultiSampling = true;
+            gameForm.MinimizeBox = false;
 
             settings = new Settings("PingPongGame/pingpong.conf");
 
-            /*graphics.PreferredBackBufferHeight = 1200;
-            graphics.PreferredBackBufferWidth = 1600;
-            graphics.ApplyChanges();
+            graphics.PreferMultiSampling = true;
+            Resolution.Init(ref graphics);
+
+            Point p = settings.getResolution("res");
+            bool fullScreen = Convert.ToBoolean(settings.get("fullscreen"));
+            Resolution.SetVirtualResolution(800, 600);
+            Resolution.SetResolution((int)p.X, (int)p.Y, fullScreen);
 
             Components.Add(new FrameRateCounter(this));
-            camera = new Camera2D();
-            camera.Pos = new Vector2(800, 600);*/
-            //camera.Zoom = 2f;
+            Components.Add(inputManager = new InputManager());
+
+            windowWidth = MathHelper.remapX(GraphicsDevice.Viewport.Width);
+            windowHeight = MathHelper.remapY(GraphicsDevice.Viewport.Height);
         }
 
         public void SetFrameRate(GraphicsDeviceManager manager, int frames)
@@ -84,10 +96,10 @@ namespace PingPong
             screenHandler.setLoadingScreen(new LoadingGameScreen());
 
             menuHandler = new MenuHandler(this);
-            menuHandler.registerMenu("Main", new PingPong.Menus.MainMenu(300, 60));
-            menuHandler.registerMenu("Options", new OptionsMenu(300, 60));
+            menuHandler.registerMenu("Main", new PingPong.Menus.MainMenu(this, 300, 60));
+            menuHandler.registerMenu("Options", new OptionsMenu(this, 300, 60));
 
-            debug = new Debug();
+            debug = new Debug(this);
             base.Initialize();
         }
 
@@ -99,6 +111,7 @@ namespace PingPong
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            cursor = Content.Load<Texture2D>("cursor");
             debug.LoadContent(Content);
         }
 
@@ -129,10 +142,34 @@ namespace PingPong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            Game1.WindowWidth = Resolution.WindowSize.X;
+            Game1.WindowHeight = Resolution.WindowSize.Y;
+
+            cursorPos = InputManager.MousePosition;
+
+            if (cursorPos.X < 0)
+            {
+                cursorPos.X = 0;
+            }
+            else if (InputManager.MousePosition.X > Resolution.WindowSize.X)
+            {
+                cursorPos.X = Resolution.WindowSize.X - 1;
+            }
+
+            if (cursorPos.Y < 0)
+            {
+                cursorPos.Y = 0;
+            }
+            else if (InputManager.MousePosition.Y > Resolution.WindowSize.Y)
+            {
+                cursorPos.Y = Resolution.WindowSize.Y - 1;
+            }
+
             if (!loadedFirst)
             {
                 loadedFirst = true;
                 screenHandler.changeTo("Menu");
+                Mouse.SetPosition(GraphicsDevice.Viewport.X + GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Y + GraphicsDevice.Viewport.Height / 2);
             }
 
             lastKeyboardState = keyboardState;
@@ -160,10 +197,14 @@ namespace PingPong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            Resolution.BeginDraw();
 
-            //this.spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, camera.get_transformation(GraphicsDevice));
-            this.spriteBatch.Begin();
+            GraphicsDevice.Clear(Color.DarkGray);
+
+            this.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Resolution.getTransformationMatrix());
+            //this.spriteBatch.Begin();
+
+            spriteBatch.Draw(Content.Load<Texture2D>("buttonBack"), new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height), Color.Black);
 
             screenHandler.drawGameScreen(gameTime, spriteBatch);
             menuHandler.drawMenu(gameTime, spriteBatch);
@@ -173,8 +214,13 @@ namespace PingPong
                 debug.Draw(gameTime, spriteBatch);
             }
 
+            if (showCursor) spriteBatch.Draw(cursor, cursorPos, Color.White);
             this.spriteBatch.End();
+            
             base.Draw(gameTime);
         }
+
+        public static float WindowWidth { get { return windowWidth; } set { windowWidth = value; } }
+        public static float WindowHeight { get { return windowHeight; } set { windowHeight = value; } }
     }
 }

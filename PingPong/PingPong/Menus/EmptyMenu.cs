@@ -9,7 +9,7 @@ namespace PingPong.Menus
 {
     class EmptyMenu: Menu
     {
-        public EmptyMenu(): base(0, 0, "EmptyMenu")
+        public EmptyMenu(Game1 game): base(game, 0, 0, "EmptyMenu")
         {
 
         }

@@ -12,7 +12,7 @@ namespace PingPong.Ui.Transitions
 
         public override void preTransition(Menu oldMenu, Menu newMenu)
         {
-            newMenu.X -= newMenu.handler.game.Window.ClientBounds.Width;
+            newMenu.X -= newMenu.handler.WindowWidth;
         }
 
         public override void doTransition(Menu oldMenu, Menu newMenu, GameTime gameTime)

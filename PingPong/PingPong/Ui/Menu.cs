@@ -18,6 +18,7 @@ namespace PingPong.Ui
 
         private HashSet<Button> buttons;
         private ButtonEventHandler eventHandler;
+        protected Game1 game;
 
         public MenuHandler handler;
         public String name;
@@ -33,21 +34,22 @@ namespace PingPong.Ui
         
         public bool loaded;
 
-        public Menu(int x, int y)
-            : this(x, y, null, false)
+        public Menu(Game1 game, int x, int y)
+            : this(game, x, y, null, false)
         {
 
         }
 
-        public Menu(int x, int y, String name)
-            : this(x, y, name, false)
+        public Menu(Game1 game, int x, int y, String name)
+            : this(game, x, y, name, false)
         {
 
         }
 
-        public Menu(int x, int y, String name, bool drawName) 
+        public Menu(Game1 game, int x, int y, String name, bool drawName) 
             : base(null, x, y)
         {
+            this.game = game;
             this.name = name;
             this.drawName = drawName;
             buttons = new HashSet<Button>();
@@ -131,6 +133,7 @@ namespace PingPong.Ui
         }
 
         public Settings Settings { get { return handler.game.settings; } }
+        public Viewport Viewport { get { return handler.game.GraphicsDevice.Viewport; } }
 
     }
 }

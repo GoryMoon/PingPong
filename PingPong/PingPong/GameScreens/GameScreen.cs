@@ -19,8 +19,6 @@ namespace PingPong.GameScreens
         public String name;
         protected Dictionary<String, Property> properties;
         public Property[] props;
-        private float windowWidth;
-        private float windowHeight;
 
         public GameScreen(String name)
         {
@@ -40,8 +38,6 @@ namespace PingPong.GameScreens
         public void addHandler(GameScreenHandler handler)
         {
             this.handler = handler;
-            this.windowWidth = handler.game.Window.ClientBounds.Width;
-            this.windowHeight = handler.game.Window.ClientBounds.Height;
         }
 
         public void add<T>(Property<T> prop)
@@ -106,8 +102,9 @@ namespace PingPong.GameScreens
 
         public ContentManager Content { get { return handler.game.Content; } }
         public GameWindow Window { get { return handler.game.Window; } }
-        public float WindowWidth { get { return windowWidth; } }
-        public float WindowHeight { get { return windowHeight; } }
+        public Viewport Viewport { get { return handler.game.GraphicsDevice.Viewport; } }
+        public float WindowWidth { get { return (handler != null) ? Game1.WindowWidth: 0f; } }
+        public float WindowHeight { get { return (handler != null) ? Game1.WindowHeight: 0f; } }
 
     }
 }

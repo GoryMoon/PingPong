@@ -24,14 +24,14 @@ namespace PingPong.GameScreens
 
         public override void init()
         {
-            handler.game.IsMouseVisible = true;
+            handler.game.showCursor = true;
             font = put("font", Content.Load<SpriteFont>("Font"));
             handler.game.menuHandler.changeTo("Main");
         }
 
         public override void unload()
         {
-            handler.game.IsMouseVisible = false;
+            handler.game.showCursor = false;
         }
 
         public override void update(GameTime gameTime)

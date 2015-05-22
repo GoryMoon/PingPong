@@ -76,10 +76,13 @@
     <Compile Include="Camera2D.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Events\ButtonEventHandler.cs" />
+    <Compile Include="InputManager.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="MathHelper.cs" />
     <Compile Include="Menus\EmptyMenu.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\OptionsMenu.cs" />
+    <Compile Include="Resolution.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Ui\Button.cs" />
     <Compile Include="FrameRateCounter.cs" />

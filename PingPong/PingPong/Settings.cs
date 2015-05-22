@@ -24,6 +24,7 @@ namespace PingPong
             this.path = Path.Combine(path, settingsName);
             props = new Dictionary<String, String>();
             load();
+            addDefaultSettings();
         }
 
         public Settings(string settingsName)
@@ -65,13 +66,19 @@ namespace PingPong
             }
         }
 
-        public void createDefaultSettings()
+        public void addDefaultSettings()
         {
             add("P1-U", (int)Keys.W);
             add("P1-D", (int)Keys.S);
             add("P2-U", (int)Keys.Up);
             add("P2-D", (int)Keys.Down);
+            add("fullscreen", false);
+            add("res", "1920x1080");
+        }
 
+        public void createDefaultSettings()
+        {
+            addDefaultSettings();
             try
             {
                 Directory.CreateDirectory(dirPath);
@@ -99,7 +106,10 @@ namespace PingPong
 
         public void add(String name, object prop)
         {
-            props.Add(name, prop.ToString());
+            if (!props.ContainsKey(name))
+            {
+                props.Add(name, prop.ToString());   
+            }
         }
 
         public void set(String name, object prop)
@@ -115,6 +125,19 @@ namespace PingPong
         public Keys getKey(String name)
         {
             return ((Keys)Enum.Parse(typeof(Keys), get(name), false));
+        }
+
+        public Point getResolution(String name)
+        {
+            string[] vals = get(name).Split('x');
+
+            if (vals.Length < 2)
+	        {
+                createDefaultSettings();
+                return getResolution(name);
+	        }
+
+            return new Point(Convert.ToInt32(vals[0]), Convert.ToInt32(vals[1]));
         }
 
     }

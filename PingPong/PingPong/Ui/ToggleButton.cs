@@ -16,8 +16,14 @@ namespace PingPong.Ui
         private Texture2D boxUnChecked;
         private Texture2D boxChecked;
 
-        public ToggleButton(String text)
+        public ToggleButton(String text, bool state)
             : base(text)
+        {
+            this.state = state;
+        }
+
+        public ToggleButton(String text)
+            : this(text, false)
         {
 
         }

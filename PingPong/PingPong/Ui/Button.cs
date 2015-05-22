@@ -76,7 +76,7 @@ namespace PingPong.Ui
             textPos.X = X + (Width - textSize.X) / 2;
             textPos.Y = Y + (Height - textSize.Y) / 2;
 
-            Point mouse = new Point(mouseState.X, mouseState.Y);
+            Point mouse = new Point((int)InputManager.MousePosition.X, (int)InputManager.MousePosition.Y);
 
             if (Bounding.Contains(mouse))
             {
@@ -86,8 +86,8 @@ namespace PingPong.Ui
                 {
                     if (Click != null)
                     {
-                        Click(this, EventArgs.Empty);
                         onClick(this, EventArgs.Empty);
+                        Click(this, EventArgs.Empty);
                     }
                 }
             }
@@ -111,6 +111,8 @@ namespace PingPong.Ui
         {
             spriteBatch.DrawString(font, text, textPos, isHovering ? Color.Gray : Color.Black);
         }
+
+        public InputManager inputManager { get { return gameScreen.handler.game.inputManager; } }
 
     }
 }

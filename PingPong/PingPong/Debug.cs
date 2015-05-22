@@ -16,11 +16,12 @@ namespace PingPong
         private KeyboardState keyboardState;
         private SpriteFont font;
         private String pressedKeys;
+        private Game1 game;
 
-        public Debug()
+        public Debug(Game1 game)
             : base(null, 0, 0)
         {
-
+            this.game = game;
         }
 
         public override void LoadContent(ContentManager content)
@@ -43,7 +44,7 @@ namespace PingPong
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            drawString("mouse: [" + mouseState.X + "," + mouseState.Y + "]", new Vector2(22, 42), spriteBatch);
+            drawString("mouse: [" + ScaledMouse.X + "," + ScaledMouse.Y + "] r(" + RawMouse.X + "," + RawMouse.Y + ")", new Vector2(22, 42), spriteBatch);
             drawString("mouse-left: " + mouseState.LeftButton.ToString(), new Vector2(22, 62), spriteBatch);
             drawString("mouse-right: " + mouseState.RightButton.ToString(), new Vector2(22, 82), spriteBatch);
             drawString("pressed: [" + pressedKeys + "]", new Vector2(22, 102), spriteBatch);
@@ -51,10 +52,20 @@ namespace PingPong
 
         private void drawString(String s, Vector2 pos, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, s, pos, Color.Black);
+            //spriteBatch.DrawString(font, s, pos, Color.Black);
             pos.X += 1;
             pos.Y += 1;
             spriteBatch.DrawString(font, s, pos, Color.White);
+        }
+
+        private Vector2 ScaledMouse
+        {
+            get { return InputManager.MousePosition; }
+        }
+
+        private Vector2 RawMouse
+        {
+            get { return InputManager.RawMousePosition; }
         }
     }
 }

@@ -49,25 +49,25 @@ namespace PingPong.GameObjects
         public override void Update(GameTime gameTime, GameWindow window)
         {
 
-            if (this.X > window.ClientBounds.Width)
+            if (this.X > gameScreen.WindowWidth)
             {
-                this.X = (window.ClientBounds.Width / 2) - (spriteTexture.Width / 2);
-                this.Y = (window.ClientBounds.Height / 2) - (spriteTexture.Height / 2);
+                this.X = (gameScreen.WindowWidth / 2) - (spriteTexture.Width / 2);
+                this.Y = (gameScreen.WindowHeight / 2) - (spriteTexture.Height / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
-                ((MainGameScreen)game).playerScore += 1;
+                ((MainGameScreen)gameScreen).playerScore += 1;
             }
             else if (this.X < 0)
             {
-                this.X = (window.ClientBounds.Width / 2) - (spriteTexture.Width / 2);
-                this.Y = (window.ClientBounds.Height / 2) - (spriteTexture.Height / 2);
+                this.X = (gameScreen.WindowWidth / 2) - (spriteTexture.Width / 2);
+                this.Y = (gameScreen.WindowHeight / 2) - (spriteTexture.Height / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
-                ((MainGameScreen)game).computerScore += 1;
+                ((MainGameScreen)gameScreen).computerScore += 1;
             }
 
 
-            if (this.Y > window.ClientBounds.Height - spriteTexture.Height)
+            if (this.Y > gameScreen.WindowHeight - spriteTexture.Height)
             {
                 this.speedY *= -1;
             }
@@ -80,13 +80,13 @@ namespace PingPong.GameObjects
             {
                 KeyboardState state = Keyboard.GetState();
 
-                if (state.IsKeyDown(game.handler.game.settings.getKey("P1-U")))
+                if (state.IsKeyDown(gameScreen.handler.game.settings.getKey("P1-U")))
                 {
                     this.speedX = this.speedY = -5;
                     startOver = false;
                 }
 
-                if (state.IsKeyDown(game.handler.game.settings.getKey("P1-D")))
+                if (state.IsKeyDown(gameScreen.handler.game.settings.getKey("P1-D")))
                 {
                     this.speedX = this.speedY = 5;
                     startOver = false;

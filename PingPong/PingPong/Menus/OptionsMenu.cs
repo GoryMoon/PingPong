@@ -29,7 +29,7 @@ namespace PingPong.Menus
          KeyBindButton p2U;
          KeyBindButton p2D;
 
-        public OptionsMenu(int x, int y) : base(x, y, "Options", true)
+        public OptionsMenu(Game1 game, int x, int y) : base(game, x, y, "Options", true)
         {
 
         }
@@ -40,7 +40,7 @@ namespace PingPong.Menus
             keyBindTexture = Content.Load<Texture2D>("buttonHover");
             font = Content.Load<SpriteFont>("ButtonFont");
 
-            addButton(new ToggleButton("Fullscreen"));
+            addButton(new ToggleButton("Fullscreen", Convert.ToBoolean(Settings.get("fullscreen"))));
 
 
             p1U = new KeyBindButton("P1 Up: ", Settings.getKey("P1-U").ToString(), "P1-U");
@@ -100,11 +100,12 @@ namespace PingPong.Menus
                         {
                             Settings.set(activeKeyBind.bindName, (int)pressedKey);
                             activeKeyBind.keyValue = pressedKey.ToString();
-                            activeKeyBind = null;
-                            bindKey = "";
-                            keyEntered = false;
-                            keySelecting = false;
                         }
+
+                        activeKeyBind = null;
+                        bindKey = "";
+                        keyEntered = false;
+                        keySelecting = false;
                     }
                 }
             }
@@ -113,24 +114,28 @@ namespace PingPong.Menus
 
         public override void onButtonClick(Button btn)
         {
-            switch (btn.id)
+            if (!keySelecting)
             {
-                case 0:
-                    handler.game.graphics.ToggleFullScreen();
-                    handler.game.graphics.ApplyChanges();
-                    break;
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                    activeKeyBind = ((KeyBindButton)btn);
-                    keySelecting = true;
-                    break;
-                case 5:
-                    handler.changeTo("Main", TransitionType.SLIDERIGHT);
-                    break;
-                default:
-                    break;
+                switch (btn.id)
+                {
+                    case 0:
+                        Point p = Settings.getResolution("res");
+                        Settings.set("fullscreen", ((ToggleButton)btn).state);
+                        Resolution.SetResolution((int)p.X, (int)p.Y, ((ToggleButton)btn).state);
+                        break;
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        activeKeyBind = ((KeyBindButton)btn);
+                        keySelecting = true;
+                        break;
+                    case 5:
+                        handler.changeTo("Main", TransitionType.SLIDERIGHT);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -140,15 +145,20 @@ namespace PingPong.Menus
 
             if (keySelecting)
             {
-                spriteBatch.Draw(keyBindTexture, new Vector2((handler.game.Window.ClientBounds.Width / 2) - ((keyBindTexture.Width * 2f) / 2), (handler.game.Window.ClientBounds.Height / 2) - ((keyBindTexture.Height * 2f) / 2)), null, Color.Gray, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0f);
-                spriteBatch.Draw(keyBindTexture, new Vector2((handler.game.Window.ClientBounds.Width / 2) - ((keyBindTexture.Width * 1.8f) / 2), (handler.game.Window.ClientBounds.Height / 2) - ((keyBindTexture.Height * 1.8f) / 2)), null, Color.White, 0f, Vector2.Zero, 1.8f, SpriteEffects.None, 0f);
+                float centerX1 = (Game1.WindowWidth / 2) - ((keyBindTexture.Width * 2f) / 2);
+                float centerY1 = (Game1.WindowHeight / 2) - ((keyBindTexture.Height * 2f) / 2);
+                float centerX2 = (Game1.WindowWidth / 2) - ((keyBindTexture.Width * 1.8f) / 2);
+                float centerY2 = (Game1.WindowHeight / 2) - ((keyBindTexture.Height * 1.8f) / 2);
+
+                spriteBatch.Draw(keyBindTexture, new Vector2(centerX1, centerY1), null, Color.Gray, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(keyBindTexture, new Vector2(centerX2, centerY2), null, Color.White, 0f, Vector2.Zero, 1.8f, SpriteEffects.None, 0f);
                 
                 string infoText = "Press the key to bind. Exit [Esc]";
                 float textWidth = font.MeasureString(infoText).X;
-                spriteBatch.DrawString(font, infoText, new Vector2((handler.game.Window.ClientBounds.Width / 2) - ((keyBindTexture.Width * 1.8f) / 2) + (((keyBindTexture.Width * 1.8f) / 2) - (textWidth / 2)), (handler.game.Window.ClientBounds.Height / 2) - ((keyBindTexture.Height * 1.8f) / 2) + 5), Color.Black);
+                spriteBatch.DrawString(font, infoText, new Vector2(centerX2 + (((keyBindTexture.Width * 1.8f) / 2) - (textWidth / 2)), centerY2 + 5), Color.Black);
 
                 float keyWidth = font.MeasureString(bindKey).X;
-                spriteBatch.DrawString(font, bindKey, new Vector2((handler.game.Window.ClientBounds.Width / 2) - ((keyBindTexture.Width * 1.8f) / 2) + (((keyBindTexture.Width * 1.8f) / 2) - (keyWidth / 2)), (handler.game.Window.ClientBounds.Height / 2) - ((keyBindTexture.Height * 1.8f) / 2) + 30), Color.Black, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(font, bindKey, new Vector2(centerX2 + (((keyBindTexture.Width * 1.8f) / 2) - (keyWidth / 2)), centerY2 + 30), Color.Black, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
             }
 
         }

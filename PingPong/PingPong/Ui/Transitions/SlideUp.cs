@@ -11,7 +11,7 @@ namespace PingPong.Ui.Transitions
     {
         public override void preTransition(Menu oldMenu, Menu newMenu)
         {
-            newMenu.Y += newMenu.handler.game.Window.ClientBounds.Height;
+            newMenu.Y += newMenu.handler.WindowHeight;
         }
 
         public override void doTransition(Menu oldMenu, Menu newMenu, GameTime gameTime)

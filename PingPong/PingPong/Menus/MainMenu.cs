@@ -14,8 +14,8 @@ namespace PingPong.Menus
 {
     public class MainMenu: Menu
     {
-        public MainMenu(int x, int y)
-            : base(x, y, "MainMenu")
+        public MainMenu(Game1 game, int x, int y)
+            : base(game, x, y, "MainMenu")
         {
 
         }

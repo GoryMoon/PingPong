@@ -50,7 +50,7 @@ namespace PingPong.Ui
 
         private void setupEmptyMenu()
         {
-            registerMenu("None", new EmptyMenu());
+            registerMenu("None", new EmptyMenu(game));
             activeMenu = menus["None"];
             activeMenu.LoadContent(game.Content);
             activeMenu.PostLoadContent(game.Content);
@@ -140,6 +140,9 @@ namespace PingPong.Ui
         {
             return transitions[tran];
         }
+
+        public float WindowWidth { get { return Game1.WindowWidth; } }
+        public float WindowHeight { get { return Game1.WindowHeight; } }
 
     }
 }
