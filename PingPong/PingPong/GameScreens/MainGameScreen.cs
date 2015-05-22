@@ -25,6 +25,11 @@ namespace PingPong.GameScreens
 
         public MainGameScreen() :base("Main")
         {
+            
+        }
+
+        public override void preInit()
+        {
             add(new Property<PlayerPaddle>("player"));
             add(new Property<ComputerPaddle>("computer"));
             add(new Property<Ball>("ball"));
@@ -116,6 +121,14 @@ namespace PingPong.GameScreens
 
             spriteBatch.DrawString(font, "Player Score: " + playerScore, new Vector2(10, 10), Color.White);
             spriteBatch.DrawString(font, "Computer Score: " + computerScore, new Vector2(Window.ClientBounds.Width - 230, 10), Color.White);
+        }
+
+        public override bool CanBePaused
+        {
+            get
+            {
+                return true; ;
+            }
         }
 
     }

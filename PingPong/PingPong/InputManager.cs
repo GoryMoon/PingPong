@@ -8,27 +8,36 @@ using Microsoft.Xna.Framework.Input;
 
 namespace PingPong
 {
-    public class InputManager : IGameComponent, IUpdateable 
+    public class InputManager 
     {
         static private MouseState currentMouseState;
         static private MouseState previousMouseState;
 
-        public void Initialize()
-        {
-            
-        }
+        static private KeyboardState currentKeyboardState;
+        static private KeyboardState previousKeyboardState;
 
-        public bool Enabled
-        {
-            get { return true; }
-        }
-
-        public event EventHandler<EventArgs> EnabledChanged;
-
-        public void Update(GameTime gameTime)
+        static public void Update(GameTime gameTime)
         {
             previousMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
+
+            previousKeyboardState = currentKeyboardState;
+            currentKeyboardState = Keyboard.GetState();
+        }
+
+        static public bool isKeyClicked(Keys key)
+        {
+            return currentKeyboardState.IsKeyDown(key) && previousKeyboardState.IsKeyUp(key);
+        }
+
+        static public bool isKeyDown(Keys key)
+        {
+            return currentKeyboardState.IsKeyDown(key);
+        }
+
+        static public bool isLeftMouseClicked()
+        {
+            return currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released;
         }
 
         static public Vector2 MousePosition
@@ -40,12 +49,5 @@ namespace PingPong
         {
             get { return new Vector2(currentMouseState.X, currentMouseState.Y); }
         }
-
-        public int UpdateOrder
-        {
-            get { return 0; }
-        }
-
-        public event EventHandler<EventArgs> UpdateOrderChanged;
     }
 }

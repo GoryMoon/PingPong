@@ -135,5 +135,7 @@ namespace PingPong.Ui
         public Settings Settings { get { return handler.game.settings; } }
         public Viewport Viewport { get { return handler.game.GraphicsDevice.Viewport; } }
 
+
+        public virtual bool canUnPause { get { return false; } }
     }
 }

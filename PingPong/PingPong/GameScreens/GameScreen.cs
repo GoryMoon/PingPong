@@ -23,13 +23,16 @@ namespace PingPong.GameScreens
         public GameScreen(String name)
         {
             this.name = name;
-            properties = new Dictionary<string,Property>();
+            properties = new Dictionary<string, Property>();
         }
 
         public void initScreen()
         {
             init();
         }
+
+        public abstract void preInit();
+
         public abstract void init();
         public abstract void update(GameTime gameTime);
         public abstract void draw(GameTime gameTime, SpriteBatch spriteBatch);
@@ -42,7 +45,7 @@ namespace PingPong.GameScreens
 
         public void add<T>(Property<T> prop)
         {
-            properties.Add(prop.name, prop);
+            if (!properties.ContainsKey(prop.name)) properties.Add(prop.name, prop);
         }
 
         public T get<T>(String name)
@@ -96,10 +99,10 @@ namespace PingPong.GameScreens
             }
 
             properties.Clear();
-            properties = null;
 
         }
 
+        public virtual bool CanBePaused { get { return false; } }
         public ContentManager Content { get { return handler.game.Content; } }
         public GameWindow Window { get { return handler.game.Window; } }
         public Viewport Viewport { get { return handler.game.GraphicsDevice.Viewport; } }

@@ -27,6 +27,8 @@ namespace PingPong.Ui
         public Game1 game;
         private Menu oldMenu;
         private Menu activeMenu;
+        private String lastMenu;
+
         private Dictionary<String, Menu> menus;
         private Dictionary<TransitionType, Transition> transitions;
 
@@ -63,30 +65,44 @@ namespace PingPong.Ui
             menus.Add(name, menu);
         }
 
+        public bool returnToLast(TransitionType transition)
+        {
+            return changeTo(lastMenu, transition);
+        }
+
+        public bool returnToLast()
+        {
+            return changeTo(lastMenu, TransitionType.NONE);
+        }
+
         public bool changeTo(String name)
         {
             return changeTo(name, TransitionType.NONE);
         }
 
         public bool changeTo(String name, TransitionType transition) {
-            Menu temp = menus[name];
 
-            if (temp != null && activeTransition == null)
+            if (!isTransitionRunning)
             {
-                oldMenu = activeMenu;
-                Log.debug("MenuHandler: Changing Menu to [{0}]", name);
-                Log.debug("MenuHandler: Menu [{0}] started loading", name);
+                Menu temp = menus[name];
 
-                sw.Restart();
-                temp.LoadContent(game.Content);
-                temp.PostLoadContent(game.Content);
-                sw.Stop();
-                Log.debug("MenuHandler: Menu [{0}] loaded in {1}", name, sw.Elapsed);
-                
-                activeTransition = getTransition(transition);
-                Log.debug("MenuHandler: Running transition {0}", transition.ToString());
-                activeTransition.currentStatus = Status.PRESETUP;
-                activeMenu = temp;
+                if (temp != null && activeTransition == null)
+                {
+                    oldMenu = activeMenu;
+                    Log.debug("MenuHandler: Changing Menu to [{0}]", name);
+                    Log.debug("MenuHandler: Menu [{0}] started loading", name);
+
+                    sw.Restart();
+                    temp.LoadContent(game.Content);
+                    temp.PostLoadContent(game.Content);
+                    sw.Stop();
+                    Log.debug("MenuHandler: Menu [{0}] loaded in {1}", name, sw.Elapsed);
+
+                    activeTransition = getTransition(transition);
+                    Log.debug("MenuHandler: Running transition {0}", transition.ToString());
+                    activeTransition.currentStatus = Status.PRESETUP;
+                    activeMenu = temp;
+                }
             }
 
             return false;
@@ -100,6 +116,7 @@ namespace PingPong.Ui
             {
                 activeTransition.transition(oldMenu, activeMenu, gameTime);
 
+                lastMenu = menus.FirstOrDefault(x => x.Value == oldMenu).Key;
                 Log.debug("MenuHandler: Menu [{0}] is unloading", oldMenu.name);
                 oldMenu.Unload();
 
@@ -144,5 +161,7 @@ namespace PingPong.Ui
         public float WindowWidth { get { return Game1.WindowWidth; } }
         public float WindowHeight { get { return Game1.WindowHeight; } }
 
+        public bool isTransitionRunning { get { return activeTransition != null && (activeTransition.currentStatus == Status.RUNNING || activeTransition.currentStatus == Status.PRESETUP  || activeTransition.currentStatus == Status.SETUP || activeTransition.currentStatus == Status.IDLE  || activeTransition.currentStatus == Status.DONE); } }
+        public bool canBeUnPaused { get { return activeMenu.canUnPause; } }
     }
 }

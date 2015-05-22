@@ -64,7 +64,7 @@ namespace PingPong.Menus
             {
                 if (keyboardState.IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
                 {
-                    handler.changeTo("Main", TransitionType.SLIDERIGHT);
+                    handler.returnToLast(TransitionType.SLIDERIGHT);
                 }
             }
             else
@@ -131,7 +131,7 @@ namespace PingPong.Menus
                         keySelecting = true;
                         break;
                     case 5:
-                        handler.changeTo("Main", TransitionType.SLIDERIGHT);
+                        handler.returnToLast(TransitionType.SLIDERIGHT);
                         break;
                     default:
                         break;

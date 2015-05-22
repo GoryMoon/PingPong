@@ -19,6 +19,11 @@ namespace PingPong.GameScreens
 
         public MenuGameScreen() :base("Menu")
         {
+            
+        }
+
+        public override void preInit()
+        {
             add(new Property<SpriteFont>("font"));
         }
 

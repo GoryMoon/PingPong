@@ -31,7 +31,6 @@ namespace PingPong
         public MenuHandler menuHandler;
         private bool loadedFirst;
         public Settings settings;
-        public InputManager inputManager;
 
         public static bool showDebug;
         private Debug debug;
@@ -68,7 +67,6 @@ namespace PingPong
             Resolution.SetResolution((int)p.X, (int)p.Y, fullScreen);
 
             Components.Add(new FrameRateCounter(this));
-            Components.Add(inputManager = new InputManager());
 
             windowWidth = MathHelper.remapX(GraphicsDevice.Viewport.Width);
             windowHeight = MathHelper.remapY(GraphicsDevice.Viewport.Height);
@@ -98,6 +96,7 @@ namespace PingPong
             menuHandler = new MenuHandler(this);
             menuHandler.registerMenu("Main", new PingPong.Menus.MainMenu(this, 300, 60));
             menuHandler.registerMenu("Options", new OptionsMenu(this, 300, 60));
+            menuHandler.registerMenu("Pause", new PauseMenu(this, 300, 60));
 
             debug = new Debug(this);
             base.Initialize();
@@ -144,6 +143,7 @@ namespace PingPong
         {
             Game1.WindowWidth = Resolution.WindowSize.X;
             Game1.WindowHeight = Resolution.WindowSize.Y;
+            InputManager.Update(gameTime);
 
             cursorPos = InputManager.MousePosition;
 

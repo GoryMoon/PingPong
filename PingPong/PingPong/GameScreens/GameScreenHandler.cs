@@ -5,8 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
+using PingPong.Ui;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace PingPong.GameScreens
 {
@@ -19,6 +22,9 @@ namespace PingPong.GameScreens
         private Dictionary<String, GameScreen> gameScreens;
         private GameScreen loaderScreen;
         private Stopwatch sw = new Stopwatch();
+
+        private bool isChangingScreen;
+        public bool isPaused = false;
 
         public GameScreenHandler(Game1 game)
         {
@@ -36,27 +42,40 @@ namespace PingPong.GameScreens
         {
             screen.addHandler(this);
             this.loaderScreen = screen;
+            this.loaderScreen.preInit();
             this.loaderScreen.init();
         }
 
         public bool changeTo(String gameScreen)
         {
-            GameScreen temp = gameScreens[gameScreen];
-
-            if (temp != null)
+            if (!isChangingScreen)
             {
-                oldGameScreen = activeGameScreen;
-                activeGameScreen = loaderScreen;
-                Log.debug("GameScreens: Changing GameScreen to [{0}]", gameScreen);
-                new Task(() => { loadNewScreen(temp); }).Start();
-                return true;
+                isChangingScreen = true;
+                GameScreen temp = gameScreens[gameScreen];
+
+                if (temp != null)
+                {
+                    if (isPaused)
+                    {
+                        isPaused = false;
+                    }
+
+                    oldGameScreen = activeGameScreen;
+                    activeGameScreen = loaderScreen;
+                    Log.debug("GameScreens: Changing GameScreen to [{0}]", gameScreen);
+                    new Task(() => { loadNewScreen(temp); }).Start();
+                    return true;
+                }    
             }
+            
             Log.debug("GameScreens: Invalid GameScreen [{0}]", gameScreen);
             return false;
         }
 
         private void loadNewScreen(GameScreen screen)
         {
+            screen.preInit();
+
             if (oldGameScreen != null)
             {
                 oldGameScreen.unload();
@@ -66,16 +85,43 @@ namespace PingPong.GameScreens
 
             sw.Reset();
             sw.Start();
+
             screen.initScreen();
             activeGameScreen = screen;
+
             sw.Stop();
 
+            isChangingScreen = false;
             Log.debug("GameScreens: GameScreen [{0}] loaded in {1}", screen.name, sw.Elapsed);
         }
 
         public void updateGameScreen(GameTime time)
         {
-            activeGameScreen.update(time);
+            if (InputManager.isKeyClicked(Keys.Escape) && activeGameScreen.CanBePaused && !game.menuHandler.isTransitionRunning)
+            {
+                if (!isPaused)
+                {
+                    isPaused = true;
+                    game.showCursor = true;
+                    game.menuHandler.changeTo("Pause", TransitionType.SLIDEDOWN);
+                }
+                else if (game.menuHandler.canBeUnPaused)
+                {
+                    isPaused = false;
+                    game.showCursor = false;
+                    game.menuHandler.changeTo("None", TransitionType.SLIDEUP);
+                }
+            }
+
+            if (!isPaused)
+            {
+                activeGameScreen.update(time);
+            }
+            else
+            {
+
+            }
+            
         }
 
         public void drawGameScreen(GameTime gameTime, SpriteBatch batch)

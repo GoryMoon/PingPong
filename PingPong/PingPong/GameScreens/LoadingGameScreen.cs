@@ -18,6 +18,11 @@ namespace PingPong.GameScreens
 
         public LoadingGameScreen() :base("Loading")
         {
+            
+        }
+
+        public override void preInit()
+        {
             add(new Property<SpriteFont>("font"));
         }
 

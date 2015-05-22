@@ -24,8 +24,6 @@ namespace PingPong.Ui
 
         public event EventHandler Click;
 
-        MouseState mouseState;
-
         protected bool isHovering;
 
         public Button(int id, GameScreen game, float x, float y, String text, SpriteFont font): base(game, x, y)
@@ -69,10 +67,7 @@ namespace PingPong.Ui
         }
 
         public override void Update(GameTime gameTime, GameWindow window)
-        {
-            MouseState lastState = mouseState;
-            mouseState = Mouse.GetState();
-            
+        {   
             textPos.X = X + (Width - textSize.X) / 2;
             textPos.Y = Y + (Height - textSize.Y) / 2;
 
@@ -82,7 +77,7 @@ namespace PingPong.Ui
             {
                 isHovering = true;
 
-                if (mouseState.LeftButton == ButtonState.Pressed && lastState.LeftButton == ButtonState.Released)
+                if (InputManager.isLeftMouseClicked())
                 {
                     if (Click != null)
                     {
@@ -111,8 +106,6 @@ namespace PingPong.Ui
         {
             spriteBatch.DrawString(font, text, textPos, isHovering ? Color.Gray : Color.Black);
         }
-
-        public InputManager inputManager { get { return gameScreen.handler.game.inputManager; } }
 
     }
 }
