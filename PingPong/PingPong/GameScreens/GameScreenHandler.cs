@@ -97,19 +97,23 @@ namespace PingPong.GameScreens
 
         public void updateGameScreen(GameTime time)
         {
-            if (InputManager.isKeyClicked(Keys.Escape) && activeGameScreen.CanBePaused && !game.menuHandler.isTransitionRunning)
+            if (InputManager.isKeyClicked(Keys.Escape))
             {
-                if (!isPaused)
+                if (activeGameScreen.CanBePaused && !game.menuHandler.isTransitionRunning)
                 {
-                    isPaused = true;
-                    game.showCursor = true;
-                    game.menuHandler.changeTo("Pause", TransitionType.SLIDEDOWN);
-                }
-                else if (game.menuHandler.canBeUnPaused)
-                {
-                    isPaused = false;
-                    game.showCursor = false;
-                    game.menuHandler.changeTo("None", TransitionType.SLIDEUP);
+                 
+                    if (!isPaused)
+                    {
+                        isPaused = true;
+                        game.showCursor = true;
+                        game.menuHandler.changeTo("Pause", TransitionType.SLIDEDOWN);
+                    }
+                    else if (game.menuHandler.canBeUnPaused)
+                    {
+                        isPaused = false;
+                        game.showCursor = false;
+                        game.menuHandler.changeTo("None", TransitionType.SLIDEUP);
+                    }
                 }
             }
 

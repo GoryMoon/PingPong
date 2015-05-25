@@ -120,7 +120,7 @@ namespace PingPong.GameScreens
             ball.Draw(gameTime, spriteBatch);
 
             spriteBatch.DrawString(font, "Player Score: " + playerScore, new Vector2(10, 10), Color.White);
-            spriteBatch.DrawString(font, "Computer Score: " + computerScore, new Vector2(Window.ClientBounds.Width - 230, 10), Color.White);
+            spriteBatch.DrawString(font, "Computer Score: " + computerScore, new Vector2(Resolution.WindowSize.X - 230, 10), Color.White);
         }
 
         public override bool CanBePaused

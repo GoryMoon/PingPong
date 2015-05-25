@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace PingPong
 {
-    public class InputManager 
+    public class InputManager : IGameComponent, IUpdateable
     {
         static private MouseState currentMouseState;
         static private MouseState previousMouseState;
@@ -16,7 +16,7 @@ namespace PingPong
         static private KeyboardState currentKeyboardState;
         static private KeyboardState previousKeyboardState;
 
-        static public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             previousMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
@@ -48,6 +48,25 @@ namespace PingPong
         static public Vector2 RawMousePosition
         {
             get { return new Vector2(currentMouseState.X, currentMouseState.Y); }
+        }
+
+        public bool Enabled
+        {
+            get { return true; }
+        }
+
+        public event EventHandler<EventArgs> EnabledChanged;
+
+        public int UpdateOrder
+        {
+            get { return 0; }
+        }
+
+        public event EventHandler<EventArgs> UpdateOrderChanged;
+
+        public void Initialize()
+        {
+
         }
     }
 }

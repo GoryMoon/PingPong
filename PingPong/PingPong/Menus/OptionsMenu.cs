@@ -62,7 +62,7 @@ namespace PingPong.Menus
 
             if (!keySelecting)
             {
-                if (keyboardState.IsKeyDown(Keys.Escape) && lastKeyboardState.IsKeyUp(Keys.Escape))
+                if (InputManager.isKeyDown(Keys.Escape))
                 {
                     handler.returnToLast(TransitionType.SLIDERIGHT);
                 }

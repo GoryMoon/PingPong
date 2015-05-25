@@ -73,7 +73,6 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Camera2D.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Events\ButtonEventHandler.cs" />
     <Compile Include="InputManager.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="MathHelper.cs" />
     <Compile Include="Menus\EmptyMenu.cs" />
     <Compile Include="Menus\MainMenu.cs" />
+    <Compile Include="Menus\MultiSubMenu.cs" />
     <Compile Include="Menus\OptionsMenu.cs" />
     <Compile Include="Menus\PauseMenu.cs" />
     <Compile Include="Resolution.cs" />

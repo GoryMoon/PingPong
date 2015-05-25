@@ -67,6 +67,7 @@ namespace PingPong
             Resolution.SetResolution((int)p.X, (int)p.Y, fullScreen);
 
             Components.Add(new FrameRateCounter(this));
+            Components.Add(new InputManager());
 
             windowWidth = MathHelper.remapX(GraphicsDevice.Viewport.Width);
             windowHeight = MathHelper.remapY(GraphicsDevice.Viewport.Height);
@@ -97,6 +98,7 @@ namespace PingPong
             menuHandler.registerMenu("Main", new PingPong.Menus.MainMenu(this, 300, 60));
             menuHandler.registerMenu("Options", new OptionsMenu(this, 300, 60));
             menuHandler.registerMenu("Pause", new PauseMenu(this, 300, 60));
+            menuHandler.registerMenu("MultiSub", new MultiSubMenu(this, 300, 60));
 
             debug = new Debug(this);
             base.Initialize();
@@ -143,7 +145,6 @@ namespace PingPong
         {
             Game1.WindowWidth = Resolution.WindowSize.X;
             Game1.WindowHeight = Resolution.WindowSize.Y;
-            InputManager.Update(gameTime);
 
             cursorPos = InputManager.MousePosition;
 
@@ -199,12 +200,10 @@ namespace PingPong
         {
             Resolution.BeginDraw();
 
-            GraphicsDevice.Clear(Color.DarkGray);
+            GraphicsDevice.Clear(Color.Black);
 
             this.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Resolution.getTransformationMatrix());
             //this.spriteBatch.Begin();
-
-            spriteBatch.Draw(Content.Load<Texture2D>("buttonBack"), new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height), Color.Black);
 
             screenHandler.drawGameScreen(gameTime, spriteBatch);
             menuHandler.drawMenu(gameTime, spriteBatch);
