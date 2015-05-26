@@ -55,7 +55,7 @@ namespace PingPong.GameObjects
                 this.Y = (gameScreen.WindowHeight / 2) - (spriteTexture.Height / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
-                ((MainGameScreen)gameScreen).playerScore += 1;
+                ((MainGameScreen)gameScreen).player1Score += 1;
             }
             else if (this.X < 0)
             {
@@ -63,7 +63,7 @@ namespace PingPong.GameObjects
                 this.Y = (gameScreen.WindowHeight / 2) - (spriteTexture.Height / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
-                ((MainGameScreen)gameScreen).computerScore += 1;
+                ((MainGameScreen)gameScreen).opponentScore += 1;
             }
 
 

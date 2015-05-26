@@ -90,7 +90,8 @@ namespace PingPong
         protected override void Initialize()
         {
             screenHandler = new GameScreenHandler(this);
-            screenHandler.registerGameScreen(new MainGameScreen());
+            screenHandler.registerGameScreen(new MainGameScreen("MainSingle"));
+            screenHandler.registerGameScreen(new MainGameScreen("MainMultiLocal", true));
             screenHandler.registerGameScreen(new MenuGameScreen());
             screenHandler.setLoadingScreen(new LoadingGameScreen());
 

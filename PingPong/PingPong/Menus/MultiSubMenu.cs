@@ -43,7 +43,7 @@ namespace PingPong.Menus
             {
                 case 0:
                     handler.changeTo("None");
-                    handler.game.screenHandler.changeTo("Main");
+                    handler.game.screenHandler.changeTo("MainMultiLocal");
                     break;
                 case 2:
                     handler.returnToLast(TransitionType.SLIDEDOWN);

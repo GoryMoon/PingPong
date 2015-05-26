@@ -41,7 +41,7 @@ namespace PingPong.Menus
             {
                 case 0:
                     handler.changeTo("None");
-                    handler.game.screenHandler.changeTo("Main");
+                    handler.game.screenHandler.changeTo("MainSingle");
                     break;
                 case 1:
                     handler.changeTo("MultiSub", TransitionType.SLIDEUP);
