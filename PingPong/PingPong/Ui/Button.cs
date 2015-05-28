@@ -19,6 +19,7 @@ namespace PingPong.Ui
         public Texture2D hoverTexture;
         public SpriteFont font;
         public String text;
+        public bool isVisible = true;
         protected Vector2 textPos;
         protected Vector2 textSize;
 
@@ -98,8 +99,11 @@ namespace PingPong.Ui
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(this.isHovering ? this.hoverTexture: this.spriteTexture, Pos, Color.White);
-            drawString(gameTime, spriteBatch);
+            if (isVisible)
+            {
+                spriteBatch.Draw(this.isHovering ? this.hoverTexture : this.spriteTexture, Pos, Color.White);
+                drawString(gameTime, spriteBatch);
+            }
         }
 
         public virtual void drawString(GameTime gameTime, SpriteBatch spriteBatch)

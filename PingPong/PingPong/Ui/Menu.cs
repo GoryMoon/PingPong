@@ -132,6 +132,10 @@ namespace PingPong.Ui
             eventHandler.addButton(btn);
         }
 
+        public virtual void transitionDone() {
+
+        }
+
         public Settings Settings { get { return handler.game.settings; } }
         public Viewport Viewport { get { return handler.game.GraphicsDevice.Viewport; } }
 

@@ -73,7 +73,7 @@ namespace PingPong
             add("P2-U", (int)Keys.Up);
             add("P2-D", (int)Keys.Down);
             add("fullscreen", false);
-            add("res", "1920x1080");
+            add("res", "1280x720");
         }
 
         public void createDefaultSettings()

@@ -122,6 +122,7 @@ namespace PingPong.Ui
 
                 Log.debug("MenuHandler: Done running transition {0}", transitions.FirstOrDefault(x => x.Value == activeTransition).Key.ToString());
                 activeTransition = null;
+                activeMenu.transitionDone();
             }
 
             if (activeTransition != null && activeTransition.currentStatus == Status.IDLE)

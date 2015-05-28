@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 
 using PingPong.Ui;
+using PingPong.Server;
 
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.GamerServices;
 
 namespace PingPong.Menus
 {
-    class MultiSubMenu: Menu
+    class MultiOnlineMenu: Menu
     {
 
-        public MultiSubMenu(Game1 game, int x, int y) : base(game, x, y, "Local or Online")
+        public MultiOnlineMenu(Game1 game, int x, int y)
+            : base(game, x, y, "Host or Join")
         {
 
         }
@@ -22,8 +25,8 @@ namespace PingPong.Menus
         {
             base.LoadContent(Content);
 
-            addButton(new Button("Local"));
-            addButton(new Button("Online"));
+            addButton(new Button("Join"));
+            addButton(new Button("Host"));
             addButton(new Button("Back (Esc)"));
         }
 
@@ -33,7 +36,12 @@ namespace PingPong.Menus
 
             if (InputManager.isKeyDown(Keys.Escape))
             {
-                handler.changeTo("Main", TransitionType.SLIDEDOWN);
+                handler.returnToLast(TransitionType.SLIDEDOWN);
+            }
+
+            if (!Guide.IsVisible && SignedInGamer.SignedInGamers.Count == 0)
+            {
+                Guide.ShowSignIn(1, false);
             }
         }
 
@@ -42,14 +50,17 @@ namespace PingPong.Menus
             switch (btn.id)
             {
                 case 0:
-                    handler.changeTo("None");
-                    handler.game.screenHandler.changeTo("MainMultiLocal");
+                    game.onlineHost = false;
+                    game.screenHandler.changeTo("Lobby");
+                    handler.changeTo("Sessions");
                     break;
                 case 1:
-                    handler.changeTo("MultiOnline", TransitionType.SLIDEUP);
+                    game.onlineHost = true;
+                    game.screenHandler.changeTo("Lobby");
+                    handler.changeTo("Lobby");
                     break;
                 case 2:
-                    handler.changeTo("Main", TransitionType.SLIDEDOWN);
+                    handler.returnToLast(TransitionType.SLIDEDOWN);
                     break;
                 default:
                     break;

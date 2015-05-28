@@ -9,6 +9,8 @@ using PingPong.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Net;
+using Microsoft.Xna.Framework.GamerServices;
 
 namespace PingPong.GameScreens
 {
@@ -26,6 +28,9 @@ namespace PingPong.GameScreens
 
         public bool multi;
         public bool online;
+
+        PacketReader packetReader = new PacketReader();
+        PacketWriter packetWriter = new PacketWriter();
 
         public MainGameScreen(String name, bool multi, bool online) :base(name)
         {
@@ -59,7 +64,7 @@ namespace PingPong.GameScreens
 
         public override void init()
         {
-            player1 = put("player1", new PlayerPaddle(this, 25f, 100f, "P1"));
+            if (!online) player1 = put("player1", new PlayerPaddle(this, 25f, 100f, "P1"));
             if (multi && !online) player2 = put("player2", new PlayerPaddle(this, WindowWidth - 25f - 38f, 100f, "P2"));
 
             if (!multi) computer = put("computer", new ComputerPaddle(this, WindowWidth - 25f - 38f, 100f));
@@ -71,10 +76,19 @@ namespace PingPong.GameScreens
             player1Score = put("player1Score", 0);
             if (!online) opponentScore = put("opponentScore", 0);
 
-            player1.LoadContent(Content);
+            if (!online) player1.LoadContent(Content);
             if (multi && !online) player2.LoadContent(Content);
             if (!multi) computer.LoadContent(Content);
             ball.LoadContent(Content);
+
+            if (online)
+            {
+                foreach (NetworkGamer gamer in handler.game.lobby.networkSession.LocalGamers)
+                {
+                    PlayerPaddle player = gamer.Tag as PlayerPaddle;
+                    player.LoadContent(Content);
+                }
+            }
 
         }
 
@@ -96,8 +110,17 @@ namespace PingPong.GameScreens
         private void HandleCollisions()
         {
             if (!multi) HandleCollision(computer);
-            HandleCollision(player1);
+            if (!online) HandleCollision(player1);
             if (multi && !online) HandleCollision(player2);
+
+            if (online)
+            {
+                foreach (NetworkGamer gamer in handler.game.lobby.networkSession.AllGamers)
+                {
+                    PlayerPaddle player = gamer.Tag as PlayerPaddle;
+                    HandleCollision(player);
+                }
+            }
 
             //player.checkCollision(ball);
 
@@ -124,24 +147,82 @@ namespace PingPong.GameScreens
                     ball.SpeedY = -5;
                 }
 
-                get<SoundEffect>("ping").Play();
+                ping.Play();
             }
         }
 
         public override void update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
-            player1.Update(gameTime, Window);
+            if (online)
+            {
+                foreach (SignedInGamer signedInGamer in
+                    SignedInGamer.SignedInGamers)
+                {
+                    PlayerPaddle player = signedInGamer.Tag as PlayerPaddle;
+
+                    updatePlayer(player, gameTime);
+                }
+                handler.game.lobby.networkSession.Update();
+            }
+
+            if (!online) player1.Update(gameTime, Window);
             if (multi && !online) player2.Update(gameTime, Window);
             if (!multi) computer.Update(gameTime, Window);
             ball.Update(gameTime, Window);
             HandleCollisions();
         }
 
+        private void updatePlayer(PlayerPaddle player, GameTime gameTime)
+        {
+            foreach (LocalNetworkGamer gamer in handler.game.lobby.networkSession.LocalGamers)
+            {
+                receiveNetworkData(gamer, gameTime);
+
+                player.Update(gameTime, handler.game.Window);
+
+                packetWriter.Write(player.Pos);
+                gamer.SendData(packetWriter, SendDataOptions.None);
+            }
+            
+        }
+
+        private void receiveNetworkData(LocalNetworkGamer gamer, GameTime gameTime)
+        {
+            while (gamer.IsDataAvailable)
+            {
+                NetworkGamer sender;
+                gamer.ReceiveData(packetReader, out sender);
+
+                if (!sender.IsLocal)
+                {
+                    PlayerPaddle player = sender.Tag as PlayerPaddle;
+                    player.Pos = packetReader.ReadVector2();
+                    player.Update(gameTime, handler.game.Window);
+                }
+            }
+        }
+
         public override void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (handler.game.lobby.networkSession != null)
+            {
+                PlayerPaddle player;
+                foreach (NetworkGamer gamer in handler.game.lobby.networkSession.AllGamers)
+                {
+                    player = gamer.Tag as PlayerPaddle;
+                    if (gamer.IsLocal)
+                    {
+                        player.Draw(gameTime, spriteBatch);
+                    }
+                    else
+                    {
+                        player.Draw(gameTime, spriteBatch);
+                    }
+                }
+            }
+
             // Draw game objects
-            player1.Draw(gameTime, spriteBatch);
+            if (!online) player1.Draw(gameTime, spriteBatch);
             if (multi && !online) player2.Draw(gameTime, spriteBatch);
             if (!multi) computer.Draw(gameTime, spriteBatch);
             ball.Draw(gameTime, spriteBatch);

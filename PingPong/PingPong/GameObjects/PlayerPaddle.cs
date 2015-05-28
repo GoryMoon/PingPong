@@ -18,7 +18,8 @@ namespace PingPong.GameObjects
     public class PlayerPaddle : Paddle
     {
 
-        private string playerPrefix;
+        public Texture2D picture;
+        public string playerPrefix;
 
         /// <summary>
         /// Create a new player paddle at a specified position
@@ -42,7 +43,7 @@ namespace PingPong.GameObjects
         override public void Update(GameTime gameTime, GameWindow window)
         {
             KeyboardState state = Keyboard.GetState();
-            Ball ball = gameScreen.get<Ball>("ball");
+            Ball ball = ((MainGameScreen)gameScreen).ball;
 
             if (state.IsKeyDown(gameScreen.handler.game.settings.getKey(getPlayerKey("U"))) && this.Pos.Y > 0)
             {

@@ -13,9 +13,11 @@ using Microsoft.Xna.Framework.Media;
 
 using PingPong.GameScreens;
 using PingPong.Ui;
-
+using PingPong.Network;
+using PingPong.Network.Messages;
 using PingPong.GameObjects;
 using PingPong.Menus;
+using PingPong.Server;
 
 namespace PingPong
 {
@@ -31,6 +33,8 @@ namespace PingPong
         public MenuHandler menuHandler;
         private bool loadedFirst;
         public Settings settings;
+        public LobbyScreen lobby;
+        public MainGameScreen onlineMainScreen;
 
         public static bool showDebug;
         private Debug debug;
@@ -45,6 +49,8 @@ namespace PingPong
         private static float windowWidth;
         private static float windowHeight;
 
+        public bool onlineHost = false;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -57,6 +63,7 @@ namespace PingPong
             gameForm.MinimizeBox = false;
 
             settings = new Settings("PingPongGame/pingpong.conf");
+            Components.Add(new GamerServicesComponent(this));
 
             graphics.PreferMultiSampling = true;
             Resolution.Init(ref graphics);
@@ -68,6 +75,8 @@ namespace PingPong
 
             Components.Add(new FrameRateCounter(this));
             Components.Add(new InputManager());
+            ClientPacketHandler.init();
+            //ClientPacketHandler.INSTANCE.sendMessage<MovementMessage>(new MovementMessage());
 
             windowWidth = MathHelper.remapX(GraphicsDevice.Viewport.Width);
             windowHeight = MathHelper.remapY(GraphicsDevice.Viewport.Height);
@@ -92,6 +101,10 @@ namespace PingPong
             screenHandler = new GameScreenHandler(this);
             screenHandler.registerGameScreen(new MainGameScreen("MainSingle"));
             screenHandler.registerGameScreen(new MainGameScreen("MainMultiLocal", true));
+            onlineMainScreen = new MainGameScreen("MainMultiOnline", true, true);
+            screenHandler.registerGameScreen(onlineMainScreen);
+            lobby = new LobbyScreen();
+            screenHandler.registerGameScreen(lobby);
             screenHandler.registerGameScreen(new MenuGameScreen());
             screenHandler.setLoadingScreen(new LoadingGameScreen());
 
@@ -100,6 +113,9 @@ namespace PingPong
             menuHandler.registerMenu("Options", new OptionsMenu(this, 300, 60));
             menuHandler.registerMenu("Pause", new PauseMenu(this, 300, 60));
             menuHandler.registerMenu("MultiSub", new MultiSubMenu(this, 300, 60));
+            menuHandler.registerMenu("MultiOnline", new MultiOnlineMenu(this, 300, 60));
+            menuHandler.registerMenu("Lobby", new LobbyMenu(this, 500, 60));
+            menuHandler.registerMenu("Sessions", new SessionMenu(this, 600, 60));
 
             debug = new Debug(this);
             base.Initialize();
@@ -182,14 +198,17 @@ namespace PingPong
                 showDebug = !showDebug;
             }
 
-            if (showDebug)
+            if (showDebug && !Guide.IsVisible)
             {
                 debug.Update(gameTime, Window);
             }
 
-            screenHandler.updateGameScreen(gameTime);
-            menuHandler.updateMenu(gameTime);
-
+            if (!Guide.IsVisible)
+            {
+                screenHandler.updateGameScreen(gameTime);
+                menuHandler.updateMenu(gameTime);
+            }
+            
             base.Update(gameTime);
         }
 
