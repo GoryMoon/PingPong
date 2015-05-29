@@ -2,7 +2,6 @@ Content\ball.xnb
 Content\pad.xnb
 Content\buttonBack.xnb
 Content\buttonHover.xnb
-Content\PingPongSound.xnb
 Content\Font.xnb
 Content\Fps.xnb
 Content\ButtonFont.xnb
@@ -10,3 +9,6 @@ Content\checkbox-checked.xnb
 Content\checkbox-unchecked.xnb
 Content\cursor.xnb
 Content\profile.xnb
+Content\background.xnb
+Content\hit.xnb
+Content\score.xnb

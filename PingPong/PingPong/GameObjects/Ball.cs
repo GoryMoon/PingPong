@@ -24,6 +24,8 @@ namespace PingPong.GameObjects
         private int speedY = 5;
         private bool startOver = false;
 
+        private SoundEffect score;
+
         /// <summary>
         /// Create a new player paddle at a specified position
         /// </summary>
@@ -39,6 +41,8 @@ namespace PingPong.GameObjects
         public override void LoadContent(ContentManager content)
         {
             this.spriteTexture = content.Load<Texture2D>("ball");
+            score = content.Load<SoundEffect>("score");
+
             base.LoadContent(content);
         }
 
@@ -55,6 +59,7 @@ namespace PingPong.GameObjects
                 this.Y = (gameScreen.WindowHeight / 2) - (spriteTexture.Height / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
+                score.Play();
                 ((MainGameScreen)gameScreen).player1Score += 1;
             }
             else if (this.X < 0)
@@ -63,6 +68,7 @@ namespace PingPong.GameObjects
                 this.Y = (gameScreen.WindowHeight / 2) - (spriteTexture.Height / 2);
                 this.speedX = this.speedY *= 0;
                 startOver = true;
+                score.Play();
                 ((MainGameScreen)gameScreen).opponentScore += 1;
             }
 
@@ -80,6 +86,7 @@ namespace PingPong.GameObjects
             {
                 KeyboardState state = Keyboard.GetState();
 
+                // Needs to be redone to start in random directions
                 if (state.IsKeyDown(gameScreen.handler.game.settings.getKey("P1-U")))
                 {
                     this.speedX = this.speedY = -5;

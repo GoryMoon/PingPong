@@ -46,6 +46,9 @@ namespace PingPong
         private Vector2 cursorPos;
         public bool showCursor;
 
+        SoundEffect background;
+        SoundEffectInstance soundInstance;
+
         private static float windowWidth;
         private static float windowHeight;
 
@@ -131,6 +134,13 @@ namespace PingPong
             spriteBatch = new SpriteBatch(GraphicsDevice);
             cursor = Content.Load<Texture2D>("cursor");
             debug.LoadContent(Content);
+
+            background = Content.Load<SoundEffect>("background");
+
+            soundInstance = background.CreateInstance();
+            soundInstance.IsLooped = true;
+            soundInstance.Volume = 0.05f;
+            soundInstance.Play();
         }
 
         /// <summary>

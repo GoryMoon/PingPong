@@ -70,7 +70,7 @@ namespace PingPong.GameScreens
             if (!multi) computer = put("computer", new ComputerPaddle(this, WindowWidth - 25f - 38f, 100f));
 
             ball = put("ball", new Ball(this, 300f, 300f));
-            ping = put("ping", Content.Load<SoundEffect>("PingPongSound"));
+            ping = put("ping", Content.Load<SoundEffect>("hit"));
             font = put("font", Content.Load<SpriteFont>("Font"));
 
             player1Score = put("player1Score", 0);

@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PingPong.Events.ButtonEventHandler" Collapsed="true">
+    <Position X="16.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAIAAAAAAAQAAAAAAAgAAAAAAAAgA=</HashCode>
+      <FileName>Events\ButtonEventHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameObjects.AdvCollision" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAIAgAAIAIAAAAAAAAAAAAgAQ=</HashCode>
+      <FileName>GameObjects\AdvCollision.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameObjects.Ball" Collapsed="true">
+    <Position X="1.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAQAAAAIAAABAAAAAQAAAAAAAAAAAAQ=</HashCode>
+      <FileName>GameObjects\Ball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameObjects.ComputerPaddle" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\ComputerPaddle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameObjects.GameObject" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAABAAAAiAAAAAQIEAQAACIAAAACACAAAAAYAQ=</HashCode>
+      <FileName>GameObjects\GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameObjects.Paddle" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>GameObjects\Paddle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameObjects.PlayerPaddle" Collapsed="true">
+    <Position X="3.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAAAAAAgAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\PlayerPaddle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameObjects.Property" Collapsed="true">
+    <Position X="10.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Property.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameObjects.Property&lt;T&gt;" Collapsed="true">
+    <Position X="10.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Property.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameScreens.GameScreen" Collapsed="true">
+    <Position X="4" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAmAgAAgAGACAAIAYAQAAAAAGEAEIAAAABCAAGAAA=</HashCode>
+      <FileName>GameScreens\GameScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameScreens.GameScreenHandler" Collapsed="true">
+    <Position X="22" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABACAABAQAAAAAQAABASEIAAAAAAgAYAA=</HashCode>
+      <FileName>GameScreens\GameScreenHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameScreens.LoadingGameScreen" Collapsed="true">
+    <Position X="7.25" Y="10.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIIBAAAAAAAQAAAAIAIAAAAAAAAAAAIAAAAAAAAEAAA=</HashCode>
+      <FileName>GameScreens\LoadingGameScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameScreens.LobbyScreen" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMIAAAAAAAAAAQFAIEIAAABAAAAAAAIACAACAAAEEAA=</HashCode>
+      <FileName>GameScreens\LobbyScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameScreens.MainGameScreen" Collapsed="true">
+    <Position X="2.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wIIwgAIAAAAAAAAAIAIICAFAGBAAAAoCAAABAAAEAAA=</HashCode>
+      <FileName>GameScreens\MainGameScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.GameScreens.MenuGameScreen" Collapsed="true">
+    <Position X="5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAAAAAAAAAIAIAAAAAAAAAAAIAAAAAAAAEAAA=</HashCode>
+      <FileName>GameScreens\MenuGameScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Menus.EmptyMenu" Collapsed="true">
+    <Position X="21.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Menus\EmptyMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Menus.LobbyMenu" Collapsed="true">
+    <Position X="26.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAACAAAAAACAAAAAAAAAAAAAAAAECAAAAAAQ=</HashCode>
+      <FileName>Menus\LobbyMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Menus.MainMenu" Collapsed="true">
+    <Position X="28.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAQ=</HashCode>
+      <FileName>Menus\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Menus.MultiOnlineMenu" Collapsed="true">
+    <Position X="30.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAQ=</HashCode>
+      <FileName>Menus\MultiOnlineMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Menus.MultiSubMenu" Collapsed="true">
+    <Position X="15" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAQ=</HashCode>
+      <FileName>Menus\MultiSubMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Menus.OptionsMenu" Collapsed="true">
+    <Position X="17.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYBIAAAAAAAAgAAAAAAAEAEAAEAAAAAgAASQIAAAAQ=</HashCode>
+      <FileName>Menus\OptionsMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Menus.PauseMenu" Collapsed="true">
+    <Position X="19.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAQ=</HashCode>
+      <FileName>Menus\PauseMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Menus.SessionMenu" Collapsed="true">
+    <Position X="24" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAgAAAAAAAAAAAAAAAIAACAACAAAAAAQ=</HashCode>
+      <FileName>Menus\SessionMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.Button" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAEAAAAAAAAgAAABAAIABgAAAAAgAIAAAABAAAAgQ=</HashCode>
+      <FileName>Ui\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.KeyBindButton" Collapsed="true">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAgAAAAAAAAAAAgIAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\KeyBindButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.Menu" Collapsed="true">
+    <Position X="23" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQCAAqABIGEAgABIAAAAAAAAAAEAEAIgAACAgABACQ=</HashCode>
+      <FileName>Ui\Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.MenuHandler" Collapsed="true">
+    <Position X="22" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgACAQCAGACAYAwCEAAAAACAAAAEICAAAACAAAAg=</HashCode>
+      <FileName>Ui\MenuHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.ToggleButton" Collapsed="true">
+    <Position X="10.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAgAAAAAAAAAQAAAAAgAEAAABAAAAAAQ=</HashCode>
+      <FileName>Ui\ToggleButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.Transitions.None" Collapsed="true">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Transitions\None.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.Transitions.SlideDown" Collapsed="true">
+    <Position X="5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Transitions\SlideDown.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.Transitions.SlideLeft" Collapsed="true">
+    <Position X="7.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Transitions\SlideLeft.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.Transitions.SlideRight" Collapsed="true">
+    <Position X="9.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Transitions\SlideRight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.Transitions.SlideUp" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Transitions\SlideUp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Ui.Transitions.Transition" Collapsed="true">
+    <Position X="5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAEQAAAAAAAgAABAAAAIAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Ui\Transitions\Transition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Debug" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAEIIAAAAAAgEAAIAAAACAAAAAAAAIAAAAAAAAAAQ=</HashCode>
+      <FileName>Debug.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.FrameRateCounter" Collapsed="true">
+    <Position X="18.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYCEEAAAQAAAgAAAAAAAAAAAAACIAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>FrameRateCounter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Game1" Collapsed="true">
+    <Position X="20.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EARAkEIAAAACAwEAAkCgAACAAACARAgAABAAAACjIoQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.InputManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAkgAAAAAYAAAAAAAUQAAAAAAABAAAAIAQASAAA=</HashCode>
+      <FileName>InputManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PingPong.Log" Collapsed="true">
+    <Position X="18.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAACACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Log.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.MathHelper" Collapsed="true">
+    <Position X="20.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MathHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Program" Collapsed="true">
+    <Position X="16.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Resolution" Collapsed="true">
+    <Position X="18.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAQgAAgAEgAAAAAEkAAAAEAAAAAAAAIAGAIAIQFA=</HashCode>
+      <FileName>Resolution.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PingPong.Settings" Collapsed="true">
+    <Position X="20.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAICAAAAAFAQCRAAAAACACAAIAAAAAAACAAA=</HashCode>
+      <FileName>Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PingPong.GameScreens.State" Collapsed="true">
+    <Position X="18.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameScreens\LobbyScreen.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PingPong.Ui.TransitionType" Collapsed="true">
+    <Position X="22" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQQQAAAAAAAAAEAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Ui\MenuHandler.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PingPong.Ui.Transitions.Status" Collapsed="true">
+    <Position X="20.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAEAAAAAAAAAAAAAAAAAAAAQAAAIAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Ui\Transitions\Transition.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PingPong.Log_Level" Collapsed="true">
+    <Position X="16.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Log.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="PingPong.Events.onClick" Collapsed="true">
+    <Position X="16.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Events\ButtonEventHandler.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
